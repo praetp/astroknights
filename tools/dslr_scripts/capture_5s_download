@@ -1,0 +1,5 @@
+gphoto2 --set-config shutterspeed=bulb
+gphoto2 --set-config capturetarget=1
+gphoto2 --set-config eosremoterelease=Immediate --wait-event=5s --set-config eosremoterelease="Release Full" --wait-event=1s
+gphoto2 --get-all-files --skip-existing --new
+

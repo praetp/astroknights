@@ -1,0 +1,3 @@
+mkdir -p /tmp/pics/
+sudo mount.cifs -o vers=1.0,username=***** //************/************ /tmp/pics/
+

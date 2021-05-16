@@ -1,0 +1,13 @@
+gphoto2 --set-config shutterspeed=52
+gphoto2 --set-config capturetarget=1
+gphoto2 --capture-image 
+gphoto2 --capture-image 
+gphoto2 --capture-image 
+gphoto2 --capture-image 
+gphoto2 --capture-image 
+gphoto2 --capture-image 
+gphoto2 --capture-image 
+gphoto2 --capture-image 
+gphoto2 --capture-image 
+gphoto2 --capture-image 
+

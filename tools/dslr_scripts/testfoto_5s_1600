@@ -1,0 +1,7 @@
+gphoto2 --set-config iso=1600
+gphoto2 --set-config shutterspeed=9
+gphoto2 --set-config=aperture=0
+gphoto2 --set-config capturetarget=0
+gphoto2 --capture-image-and-download --force-overwrite
+gpicview capt0000.cr2 
+
