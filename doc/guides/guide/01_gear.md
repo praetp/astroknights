@@ -1,0 +1,63 @@
+# Gear
+Astrophotography can be very involved in terms of equipment.
+The table below gives a concise summary in descending order of priority.
+
+Estimated budget is the retail price but you may find a cheaper solution second hand.
+
+
+```
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| Item             | Rationale                                                                               | Priority    | Estimated budget | What I have                                                                             |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| Tripod           | You need this to put your camera on.                                                    | Must-have   | $100 - 500       | Sirui Star 8 + E-10 (Carbon fiber)                                                      |
+|                  | As this will have to bear all other equipment you may buy in the future,                |             |                  |                                                                                         |
+|                  | it's highly advised to buy something decent and sturdy.                                 |             |                  | I am quite happy about it.                                                              |
+|                  | Don't buy something flimsy, you will regret.                                            |             |                  | It's pretty light but can still support a decent payload.                               |
+|                  | On the other hand, consider the weight of the tripod if you plan to carry it a lot.     |             |                  | I would never go lighter than this though.                                              |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| DSLR Camera      | A DSLR with a kit lens (18-55mm) is great to get started.                               | Must-have   | > $500           | Canon EOS 600D                                                                          |
+|                  | Maybe you could try a high-end smartphone as well.                                      |             |                  |                                                                                         |
+|                  | Second hand is definitely an option here. My camera is quite old and still usable.      |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| A better lens    | The kit is only suitable for wide-field                                                 | Highly      | > $250           | Tamron 18-270mm f/3.5-6.3 Di II VC PZD Canon                                            |
+|                  | and will not get you very far (except for M31 Andromeda as it's pretty big)             | recommended |                  |                                                                                         |
+|                  | You could go for a telescope                                                            |             |                  | Very mixed feelings about this lens.                                                    |
+|                  | (e.g. I hear the William Optics Redcat 51 is really great) but I recommend a zoom lens. |             |                  | I bought it second hand for 200 euro                                                    |
+|                  | The optical performance is not great                                                    |             |                  | and it has helped me a lot to learn the skills and I have taken some nics pics with it. |
+|                  | but its flexibility will be very helpful for beginners.                                 |             |                  | However, when zoomed in,                                                                |
+|                  |                                                                                         |             |                  | the field curvature is just horrible and only at the very center of the frame,          |
+|                  |                                                                                         |             |                  | performance is ok                                                                       |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| A tracking mount | Untracked astrophotography will only keep you busy for a month or two.                  | Highly      | $500             | iOptron SkyGuider Pro                                                                   |
+|                  | You'll quickly get frustrated that you cannot take longer exposures,                    | recommended |                  |                                                                                         |
+|                  | especially at higher focal lengths.                                                     |             |                  | It is not a GoTo mount (these are easier to use but are also a lot more expensive).     |
+|                  | As the stars and galaxies make a complete circle                                        |             |                  | I like the fact it's pretty light and mobile.                                           |
+|                  | around the North Celestial Pole in 24 hours,                                            |             |                  | It has some flaws (the AltAz base is not the greatest)                                  |
+|                  | you will notice star trailing if your exposures are too long.                           |             |                  | but it works pretty decent for me.                                                      |
+|                  | A tracking mount will follow the movement of the stars                                  |             |                  |                                                                                         |
+|                  | and this allows you to take much longer exposures.                                      |             |                  |                                                                                         |
+|                  |                                                                                         |             |                  |                                                                                         |
+|                  | Its importance cannot be overstated, you will need this if you want to advance.         |             |                  |                                                                                         |
+|                  |                                                                                         |             |                  |                                                                                         |
+|                  |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| Bahtinov mask    |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| Red headlight    |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| Stellarium       |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| Extra battery    |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+| Intervalometer   |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+|                  |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+|                  |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+|                  |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+|                  |                                                                                         |             |                  |                                                                                         |
++------------------+-----------------------------------------------------------------------------------------+-------------+------------------+-----------------------------------------------------------------------------------------+
+
+```
