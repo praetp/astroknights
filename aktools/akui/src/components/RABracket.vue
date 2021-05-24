@@ -1,0 +1,102 @@
+<template>
+  <div class="RABracket">
+    <div style="display: flex">
+      <div style="width: 25%">
+        <h1>
+        <button type="button" v-on:click="calibrate">Calibrate</button>
+        </h1>
+      </div>
+      <div style="width: 25%">
+        <h1>ROLL: {{roll}}</h1>
+      </div>
+      <div style="width: 25%;">
+        <h1>ROLL2MINS: {{roll2mins}}</h1>
+      </div>
+      <div style="width: 25%">
+        <h1>ROLL2HOURS: {{roll2hours}}</h1>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  name: 'RABracket',
+  props: {
+  },
+  data() {
+    return{
+        websocket: null,
+        server: "ws://astroberry:8001",
+        roll: 0,
+        roll2mins: 0,
+        roll2hours: 0
+    }
+  },
+  beforeUnmount() {
+    this.websocket.close()
+  },
+  mounted() {
+    this.openws()
+  },
+  methods: {
+    calibrate: function() {
+        console.log("CALIBRATE")
+      let resp = {"calibrate": true}
+      if (this.websocket != null){
+        this.websocket.send(JSON.stringify(resp));
+      }
+    },
+    openws: function() {
+      let myself=this
+      if (myself.websocket != null) {
+        myself.websocket.close()
+      }
+      try {
+          myself.websocket = new WebSocket(myself.server);
+          myself.websocket.onopen = function(openEvent) {
+              console.log("WebSocket OPEN: " + JSON.stringify(openEvent, null, 4));
+              myself.status="OPEN"
+              myself.error=""
+          };
+          myself.websocket.onclose = function (closeEvent) {
+              console.log("WebSocket CLOSE: " + JSON.stringify(closeEvent, null, 4));
+              myself.status="CLOSED"
+          };
+          myself.websocket.onerror = function (errorEvent) {
+              console.log("WebSocket ERROR: " + JSON.stringify(errorEvent, null, 4));
+              myself.error=JSON.stringify(errorEvent, null, 4)
+          };
+          myself.websocket.onmessage = function (messageEvent) {
+              var wsMsg = messageEvent.data;
+              var msg = JSON.parse(wsMsg)
+              console.log(msg)
+              myself.roll=msg["data"]["roll"]
+              myself.roll2mins=msg["data"]["rolltomins"]
+              myself.roll2hours=msg["data"]["rolltohours"]
+          };
+      } catch (exception) {
+          console.log("ERROR",exception);
+      }
+    }
+  }
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+h3 {
+  margin: 40px 0 0;
+}
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+li {
+  display: inline-block;
+  margin: 0 10px;
+}
+a {
+  color: #42b983;
+}
+</style>
