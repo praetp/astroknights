@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # based on  https://github.com/jonathanmeaney/unicorn-hat-hd-clock
 
 import time
@@ -178,8 +178,8 @@ def displayTimeDots(x, y):
 
 def show_current(hours, minutes):
     displayTimeDots(7,15)
-    hourParts = [ hours / 10, hours % 10 ]
-    minuteParts = [ minutes / 10, minutes % 10 ]
+    hourParts = [ hours // 10, hours % 10 ]
+    minuteParts = [ minutes // 10, minutes % 10 ]
 
     # TIME Details
     # Only update first hour number if it is different to what is currently displayed
@@ -206,8 +206,8 @@ def show_current(hours, minutes):
 
 def show_target(hours, minutes):
     displayTimeDots(7,5)
-    hourParts = [ hours / 10, hours % 10 ]
-    minuteParts = [ minutes / 10, minutes % 10 ]
+    hourParts = [ hours // 10, hours % 10 ]
+    minuteParts = [ minutes // 10, minutes % 10 ]
 
     displayNumber(0,5, hourParts[0])
     displayNumber(4,5, hourParts[1])
@@ -223,7 +223,7 @@ if __name__ == "__main__":
     try:
         while True:
             show_target(9, 56) #M81 Bode
-            show_current(day_minute / 60, day_minute % 60)
+            show_current(day_minute // 60, day_minute % 60)
             day_minute = (day_minute + direction) % (60 * 24)
             time.sleep(SIMULATED_SPEED)
 
