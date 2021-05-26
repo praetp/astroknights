@@ -36,11 +36,33 @@ class mpu6050Controller(Thread):
         super().__init__()
         self.sensor = mpu6050(0x68)
         self._running = True
+        self.loadoffset()
         self.cb = cb
 
     def terminate(self):
         print("mpu6050Controller: TERM")
         self._running = False
+
+    def storeoffset(self):
+        try:
+            f = open("offset", "w")
+            f.write(str(self.vals["rolloffset"]))
+        except IOError:
+            print("File not accessible")
+        finally:
+            f.close()
+
+    def loadoffset(self):
+        try:
+            f = open("offset", "r")
+            self.vals["rolloffset"] = float(f.read())
+        except Exception:
+            print("File not accessible")
+
+    def reset(self):
+        self.vals["rolloffset"] = 0
+        self.storeoffset()
+
 
     def addToArray(self, t, val):
         t.append(val)
@@ -113,6 +135,7 @@ class mpu6050Controller(Thread):
 
     def calibrate(self):
         self.vals["rolloffset"]+=self.roll()
+        self.storeoffset()
 
     def run(self):
         print("mpu6050Controller: RUN")

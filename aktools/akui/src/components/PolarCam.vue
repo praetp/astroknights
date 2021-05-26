@@ -1,7 +1,7 @@
 <template>
   <div class="PolarCamera">
     <div style="display: flex, width: 100%, height: 100%">
-        <img src="http://astroberry:8002/stream.mjpg" style="width: auto, height=100%">
+        <img :src="server" style="width: auto, height=100%">
     </div>
   </div>
 </template>
@@ -13,8 +13,10 @@ export default {
   },
   data() {
     return{
+        server: "http://"+window.location.host+"/stream.mjpg"
+        //server: "http://astroberry:8001/stream.mjpg"
     }
-  }
+  },
 }
 </script>
 

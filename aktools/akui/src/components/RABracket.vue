@@ -1,19 +1,23 @@
 <template>
   <div class="RABracket">
     <div style="display: flex">
-      <div style="width: 25%">
+      <div style="width: 20%">
         <h1>
         <button type="button" v-on:click="calibrate">Calibrate</button>
+        <button type="button" v-on:click="reset">Reset</button>
         </h1>
       </div>
-      <div style="width: 25%">
+      <div style="width: 20%">
         <h1>ROLL: {{roll}}</h1>
       </div>
-      <div style="width: 25%;">
+      <div style="width: 20%;">
         <h1>ROLL2MINS: {{roll2mins}}</h1>
       </div>
-      <div style="width: 25%">
+      <div style="width: 20%">
         <h1>ROLL2HOURS: {{roll2hours}}</h1>
+      </div>
+      <div style="width: 20%">
+        <h1>ROLLOFFSET: {{rolloffset}}</h1>
       </div>
     </div>
   </div>
@@ -27,7 +31,8 @@ export default {
   data() {
     return{
         websocket: null,
-        server: "ws://astroberry:8001",
+        server: "ws://"+window.location.host+"/ws/",
+        //server: "ws://"+"astroberry:8000"+"/ws/",
         roll: 0,
         roll2mins: 0,
         roll2hours: 0
@@ -47,12 +52,20 @@ export default {
         this.websocket.send(JSON.stringify(resp));
       }
     },
+    reset: function() {
+        console.log("RESET")
+      let resp = {"reset": true}
+      if (this.websocket != null){
+        this.websocket.send(JSON.stringify(resp));
+      }
+    },
     openws: function() {
       let myself=this
       if (myself.websocket != null) {
         myself.websocket.close()
       }
       try {
+           console.log(window.location)
           myself.websocket = new WebSocket(myself.server);
           myself.websocket.onopen = function(openEvent) {
               console.log("WebSocket OPEN: " + JSON.stringify(openEvent, null, 4));
@@ -74,6 +87,7 @@ export default {
               myself.roll=msg["data"]["roll"]
               myself.roll2mins=msg["data"]["rolltomins"]
               myself.roll2hours=msg["data"]["rolltohours"]
+              myself.rolloffset=msg["data"]["rolloffset"]
           };
       } catch (exception) {
           console.log("ERROR",exception);
