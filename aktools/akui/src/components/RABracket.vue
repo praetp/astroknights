@@ -1,23 +1,23 @@
 <template>
   <div class="RABracket">
-    <div style="display: flex">
+    <div style="display: flex; height: auto">
       <div style="width: 20%">
-        <h1>
+        <h3>
         <button type="button" v-on:click="calibrate">Calibrate</button>
         <button type="button" v-on:click="reset">Reset</button>
-        </h1>
+        </h3>
       </div>
       <div style="width: 20%">
-        <h1>ROLL: {{roll}}</h1>
+        <h3>ROLL: {{roll}}</h3>
       </div>
       <div style="width: 20%;">
-        <h1>ROLL2MINS: {{roll2mins}}</h1>
+        <h3>ROLL2MINS: {{roll2mins}}</h3>
       </div>
       <div style="width: 20%">
-        <h1>ROLL2HOURS: {{roll2hours}}</h1>
+        <h3>ROLL2HOURS: {{roll2hours}}</h3>
       </div>
       <div style="width: 20%">
-        <h1>ROLLOFFSET: {{rolloffset}}</h1>
+        <h3>ROLLOFFSET: {{rolloffset}}</h3>
       </div>
     </div>
   </div>
@@ -31,8 +31,8 @@ export default {
   data() {
     return{
         websocket: null,
-        server: "ws://"+window.location.host+"/ws/",
-        //server: "ws://"+"astroberry:8000"+"/ws/",
+        //server: "ws://"+window.location.host+"/ws/",
+        server: "ws://"+"astroberry:8000"+"/ws/",
         roll: 0,
         roll2mins: 0,
         roll2hours: 0
@@ -100,7 +100,7 @@ export default {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 h3 {
-  margin: 40px 0 0;
+  margin: 0px 0 0;
 }
 ul {
   list-style-type: none;
