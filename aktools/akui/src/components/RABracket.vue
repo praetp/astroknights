@@ -31,8 +31,8 @@ export default {
   data() {
     return{
         websocket: null,
-        //server: "ws://"+window.location.host+"/ws/",
-        server: "ws://"+"astroberry:8000"+"/ws/",
+        server: "ws://"+window.location.host+"/ws/",
+        //server: "ws://"+"astroberry:8000"+"/ws/",
         roll: 0,
         roll2mins: 0,
         roll2hours: 0

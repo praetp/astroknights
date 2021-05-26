@@ -13,8 +13,8 @@ export default {
   },
   data() {
     return{
-        //server: "http://"+window.location.host+"/stream.mjpg"
-        server: "http://astroberry:8000/stream.mjpg"
+        server: "http://"+window.location.host+"/stream.mjpg"
+        //server: "http://astroberry:8000/stream.mjpg"
     }
   },
 }
