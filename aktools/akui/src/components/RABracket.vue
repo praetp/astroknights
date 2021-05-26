@@ -2,22 +2,24 @@
   <div class="RABracket">
     <div style="display: flex; height: auto">
       <div style="width: 20%">
-        <h3>
-        <button type="button" v-on:click="calibrate">Calibrate</button>
-        <button type="button" v-on:click="reset">Reset</button>
-        </h3>
+        <div><button type="button" v-on:click="calibrate">Calibrate</button></div>
+        <div><button type="button" v-on:click="reset">Reset</button></div>
       </div>
       <div style="width: 20%">
-        <h3>ROLL: {{roll}}</h3>
+        <div><h4>ROLL</h4></div>
+        <div><h4>{{roll}}</h4></div>
       </div>
       <div style="width: 20%;">
-        <h3>ROLL2MINS: {{roll2mins}}</h3>
+        <div><h4>ROLL2MINS</h4></div>
+        <div><h4>{{roll2mins}}</h4></div>
       </div>
       <div style="width: 20%">
-        <h3>ROLL2HOURS: {{roll2hours}}</h3>
+        <div><h4>ROLL2HOURS</h4></div>
+        <div><h4>{{roll2hours}}</h4></div>
       </div>
       <div style="width: 20%">
-        <h3>ROLLOFFSET: {{rolloffset}}</h3>
+        <div><h4>ROLLOFFSET</h4></div>
+        <div><h4>{{rolloffset}}</h4></div>
       </div>
     </div>
   </div>
@@ -35,7 +37,8 @@ export default {
         //server: "ws://"+"astroberry:8000"+"/ws/",
         roll: 0,
         roll2mins: 0,
-        roll2hours: 0
+        roll2hours: 0,
+        rolloffset: 0
     }
   },
   beforeUnmount() {
@@ -99,7 +102,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-h3 {
+h4 {
   margin: 0px 0 0;
 }
 ul {
