@@ -4,7 +4,7 @@
 #converts a directory of raws into a directory of jpgs
 set -e
 
-if [ -d jpg ]
+if [ ! -d jpg ]
 then
 	mkdir jpg
 fi
