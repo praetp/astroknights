@@ -1,8 +1,24 @@
 #!/bin/bash
+#converts a single raws into a jpg
+#or
 #converts a directory of raws into a directory of jpgs
 set -e
-mkdir jpg
-for raw in *.CR2
-do
-	darktable-cli $raw jpg/$raw.jpg
-done
+
+if [ -d jpg ]
+then
+	mkdir jpg
+fi
+
+if [ $# -eq 0 ]
+then
+	#no arguments
+	for raw in *.cr2
+	do
+		darktable-cli $raw jpg/$raw.jpg
+	done
+else 
+	for raw in "$@"
+	do
+		darktable-cli $raw jpg/$raw.jpg
+	done
+fi
