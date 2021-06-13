@@ -1,0 +1,22 @@
+#!/bin/bash
+#generic script to take short test exposures for the purpose of:
+# framing target
+# focusing (e.g. with bahtinov mask)
+
+pkill -f gphoto2 #needed as linux gvfs-gphoto2-... tends to claim the camera when connected over usb. This is a hacky way to stop this.
+set -ex
+if [ ! -d img ]; then
+	mkdir img
+fi
+gphoto2 --set-config iso=1600
+gphoto2 --set-config shutterspeed=10
+gphoto2 --set-config=aperture=0
+gphoto2 --set-config capturetarget=0
+gphoto2 --capture-image-and-download --force-overwrite
+
+FILENAME=$(date -Iseconds)
+mv capt0000.cr2 img/${FILENAME}
+cd img
+eom img/${FILENAME}
+cd -
+
