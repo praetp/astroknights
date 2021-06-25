@@ -26,16 +26,13 @@ convert light -out=../process
 cd ../process
 
 # Pre-process Light Frames
-preprocess light -cfa -equalize_cfa -debayer
+preprocess light -bias="=2048" -cfa -equalize_cfa -debayer
 
 # Align lights
-#register pp_light
-# SELECT SUITABLE REFERENCE FRAME
-# DO THIS MANUALLY BY SELECTING THE RIGHT SECTION OF THE PICTURE
+register pp_light
 
 # Stack calibrated lights to result.fit
-#stack r_pp_light rej 3 3 -norm=addscale -output_norm -out=../result
-# ALSO DO THIS MANUALLY
+stack r_pp_light rej 3 3 -norm=addscale -output_norm -out=../result
 
-#cd ..
-#close
+cd ..
+close

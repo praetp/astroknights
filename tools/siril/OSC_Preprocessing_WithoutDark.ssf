@@ -36,7 +36,7 @@ convert light -out=../process
 cd ../process
 
 # Pre-process Light Frames
-preprocess light -flat=pp_flat_stacked -cfa -equalize_cfa -debayer
+preprocess light -bias="=2048" -flat=pp_flat_stacked -cfa -equalize_cfa -debayer
 
 # Align lights
 register pp_light
