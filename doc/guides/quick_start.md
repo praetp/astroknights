@@ -21,4 +21,12 @@ These are the steps you have to do every evening:
 Tightening the left knob, makes the central line in the bahtinov mask go up.
 Tightening the right knob, makes the central line in the bahtinov mask go down.
 
+### Polar alignment
+When the Ekos polar alignment indicates an error in azimuth with a positive angle, you should move the base
+westwards by turning the right knob. The opposite for negative angle.
+
+When the Ekos polar alignment indicates an error in altitude with a positive angle, you should move the base
+down by turning the altitude knob counter clockwise. This moves the base downwards. For a negative error,
+move the base up by turning the knob clockwise.
+
 
