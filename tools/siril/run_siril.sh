@@ -24,8 +24,8 @@ if [ ! -d "masters" ]; then
 	mkdir masters
 fi
 
-if [ -d "Flats" ]; then
-	ln -sf Flats flats
+if [ -d "Flat" ]; then
+	ln -sf Flat flats
 fi
 
 if [ -f "masters/masterFlat.fit" ]; then
@@ -40,8 +40,8 @@ else
 	echo "No flats to process. You may have vignetting and unwanted artifacts in the final result."
 fi
 
-if [ -d "Darks" ]; then
-	ln -sf Darks darks
+if [ -d "Dark" ]; then
+	ln -sf Dark darks
 fi
 
 if [ -f "masters/masterDark.fit" ]; then
@@ -57,8 +57,8 @@ else
 	BIAS_ARG="-bias=\"=2048\""
 fi
 
-if [ -d "Lights" ]; then
-	ln -sf Lights lights
+if [ -d "Light" ]; then
+	ln -sf Light lights
 fi
 
 
