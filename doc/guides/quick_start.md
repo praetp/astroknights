@@ -12,6 +12,7 @@ These are the steps you have to do every evening:
 - Update position in EKOS (through Kstars)
 - Set focal length right again if you changed it
 - Start Guiding calibration
+- Check focus again !
 - Start image acquisition
 
 ## To keep in mind
