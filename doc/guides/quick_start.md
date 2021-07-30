@@ -25,6 +25,20 @@ Tightening the left knob, makes the central line in the bahtinov mask go up. The
 Tightening the right knob, makes the central line in the bahtinov mask go down. The ring moves to the left.
 
 ### Polar alignment
+#### Polar scope polar alignment
+Steps:
+- Bring Polaris in frame with the recticle illuminated.
+- Put polaris in the center. When moving altitude up (or down) all the way the outermost circle, Polaris should be exactly at 12h (or 6h).
+  If this is not the case, press the RA buttons to correct for this.
+- Look at the Polar alignment app where to put Polaris. Adjust the knobs to get Polaris in the right place. Some indication about the error: 
+  The polar scope has 6 ticks per 'hour' so this means in total 72 ticks. One tick is then equal to: 
+```
+2*40*pi=72*x
+      x=3.5'
+```
+  In other words, if you make a mistake of one tick, your error is at least 3.5', which is already a lot.
+
+#### Ekos Polar alignment assistent
 When the Ekos polar alignment indicates an error in azimuth with a positive angle, you should move the base
 westwards by turning the right knob. 
 When the Ekos polar alignment indicates an error in azimuth with a negative angle, you should move the base
