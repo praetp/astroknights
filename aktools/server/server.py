@@ -20,9 +20,10 @@ def cb(data):
         })
     asyncio.run(wsHandler.broadcast(ret))
 
-mpu6050Controller = mpu6050Controller(cb)
-mpu6050Controller.start()
-wsHandler.setmpu(mpu6050Controller)
+#mpu6050Controller = mpu6050Controller(cb)
+#mpu6050Controller.start()
+#wsHandler.setmpu(mpu6050Controller)
+wsHandler.setmpu(False)
 
 cameraController = cameraController()
 streamHandler.setStreamingOutput(cameraController.getOutputStream())

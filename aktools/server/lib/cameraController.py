@@ -55,7 +55,7 @@ class cameraController():
         #camera.crop = (0.2, 0.2, 0.6, 0.6)
         self.camera.awb_mode = 'off'
         self.camera.awb_gains = Fraction(329, 256)
-        self.camera.brightness = 50
+        self.camera.brightness = 60
         self.camera.exposure_mode="off"
         self.camera.start_recording(self.output, format='mjpeg')
         self.timestamploop = tornado.ioloop.PeriodicCallback(self.annotate, 1000);

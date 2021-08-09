@@ -22,10 +22,12 @@ class wsHandler(tornado.websocket.WebSocketHandler):
         print(message)
         if "calibrate" in message:
             print("CALIBRATE")
-            self.mpu6050Controller.calibrate()
+            if (self.mpu6050Controller):
+                self.mpu6050Controller.calibrate()
         if "reset" in message:
             print("RESET")
-            self.mpu6050Controller.reset()
+            if (self.mpu6050Controller):
+                self.mpu6050Controller.reset()
 
     @classmethod
     def setmpu(cls, mpu):
