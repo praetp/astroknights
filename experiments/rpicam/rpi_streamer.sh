@@ -7,4 +7,4 @@ MODE=1
 SHUTTER_TIME_US=250000
 
 
-raspivid -v --mode ${MODE} --settings --exposure night -ss ${SHUTTER_TIME_US} --nopreview --hflip --vflip --flush -t 0 --codec MJPEG -l -o tcp://0.0.0.0:3333
+raspivid -v --mode ${MODE} --settings --exposure night -ISO 800 -ss ${SHUTTER_TIME_US} --nopreview --hflip --vflip --flush -t 0 --codec MJPEG -l -o tcp://0.0.0.0:3333
