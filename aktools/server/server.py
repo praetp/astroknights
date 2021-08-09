@@ -46,6 +46,6 @@ try:
 except KeyboardInterrupt:
     loop.stop()
 finally:
-    mpu6050Controller.terminate()
+#    mpu6050Controller.terminate()
     camera.stop()
 
