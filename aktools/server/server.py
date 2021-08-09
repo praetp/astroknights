@@ -4,7 +4,7 @@ import tornado
 import asyncio
 
 from lib.wsHandler import wsHandler
-from lib.mpu6050Controller import mpu6050Controller# from lib.mosquitto import Mosquitto
+#from lib.mpu6050Controller import mpu6050Controller# from lib.mosquitto import Mosquitto
 from lib.streamHandler import streamHandler
 from lib.indexHandler import indexHandler
 from lib.cameraController import cameraController
