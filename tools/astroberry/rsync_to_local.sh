@@ -5,8 +5,9 @@ DEST=${DEST:-/tmp}
 while true
 do
 	#This has spurious failures so better not fail the script when it fails
-	#only copy files that are minimum 15MB
-	rsync -av --remove-source-files --min-size=15m astroberry:/camera $DEST
+	rsync -av astroberry:/camera $DEST
+	#remove files older than a minute
+	ssh astroberry "find /path -mmin +59 -type f -exec rm -fv {} \;"
 	sleep 1
 done
 
