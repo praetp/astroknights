@@ -5,8 +5,8 @@ DEST=${DEST:-/tmp}
 while true
 do
 	#This has spurious failures so better not fail the script when it fails
-	#only copy files that are minimum 18MB (good indicator of whether files are complete)
-	rsync -av --remove-source-files --min-size=18m astroberry:/camera $DEST
+	#only copy files that are minimum 15MB
+	rsync -av --remove-source-files --min-size=15m astroberry:/camera $DEST
 	sleep 1
 done
 
