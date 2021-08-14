@@ -5,8 +5,10 @@ set -e
 #Select 1 for zoomed FOV
 
 #raspivid -v --settings --exposure night -ISO 800 --hflip --vflip --nopreview -t 0 -o - | nc 192.168.1.12 5000
-MODE=1 
-SHUTTER_TIME_US=700000
+MODE=3 
+ISO=3200
+SHUTTER_TIME_US=200000
+HOST=192.168.1.203
 
-
-raspivid -v --mode ${MODE} --settings --exposure night -ISO 1600 -ss ${SHUTTER_TIME_US} --nopreview --hflip --vflip --flush -t 0 -o - | nc 192.168.1.12 5000
+#
+raspivid -v --mode ${MODE} --settings --contrast 50 --exposure night --roi 0.35,0.35,0.5,0.5 --drc high -ISO ${ISO} -ss ${SHUTTER_TIME_US} --nopreview --vflip --hflip --flush -t 0 -o - | nc ${HOST} 5000
