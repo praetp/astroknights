@@ -24,24 +24,57 @@ if [ ! -d "masters" ]; then
 	mkdir masters
 fi
 
+#either take masterBias or use synthetic bias
+if [ -e "masters/masterBias.fit" ]; then
+	BIAS_ARG="-bias=../masters/masterBias"
+else 
+	BIAS_ARG="-bias=\"=2048\""
+fi
+
 if [ -d "Flat" ]; then
-	ln -sf Flat flats
+	#only create link if not empty
+	if [ ! -e "flats" ]; then
+		if [ ! -z "$(ls -A Flat)" ]; then
+			ln -sf Flat flats
+		fi
+	fi
 fi
 
 if [ -f "masters/masterFlat.fit" ]; then
 	echo "Reusing masterFlat"
 	MASTER_FLAT_ARG="-flat=../masters/masterFlat"
 elif [ -e "flats" ]; then
-	siril -s ${SCRIPT_DIR}/makeMasterFlat.ssf
+
+siril -s - <<END_OF_SCRIPT
+requires 0.99.10
+
+# Convert Flat Frames to .fit files
+cd flats
+convert flat -out=../process
+cd ../process
+
+# Pre-process Flat Frames
+preprocess flat ${BIAS_ARG}
+
+# Stack Flat Frames to pp_flat_stacked.fit
+stack pp_flat rej 3 3 -norm=mul -out=../masters/masterFlat
+cd ..
+END_OF_SCRIPT
+
 	rm -rf process
 	MASTER_FLAT_ARG="-flat=../masters/masterFlat"
-	echo "Reusing existing masterFlat."
+	echo "Using new masterFlat."
 else
 	echo "No flats to process. You may have vignetting and unwanted artifacts in the final result."
 fi
 
 if [ -d "Dark" ]; then
-	ln -sf Dark darks
+	#only create link if not empty
+	if [ ! -e "darks" ]; then
+		if [ ! -z "$(ls -A Dark)" ]; then
+			ln -sf Dark darks
+		fi
+	fi
 fi
 
 if [ -f "masters/masterDark.fit" ]; then
@@ -52,6 +85,7 @@ elif [ -e "darks" ]; then
 	siril -s ${SCRIPT_DIR}/makeMasterDark.ssf
 	rm -rf process
 	MASTER_DARK_ARG="-dark=../masters/masterDark"
+	echo "Using new masterDark."
 else
 	echo "No darks to process. You may have elavated noise levels and/or hot pixels in the final result."
 	BIAS_ARG="-bias=\"=2048\""
