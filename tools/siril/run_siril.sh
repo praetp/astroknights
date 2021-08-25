@@ -24,9 +24,32 @@ if [ ! -d "masters" ]; then
 	mkdir masters
 fi
 
+if [ -d "Bias" ]; then
+	#only create link if not empty
+	if [ ! -e "biases" ]; then
+		if [ ! -z "$(ls -A Bias)" ]; then
+			ln -sf Bias biases
+		fi
+	fi
+fi
+
 #either take masterBias or use synthetic bias
 if [ -e "masters/masterBias.fit" ]; then
 	BIAS_ARG="-bias=../masters/masterBias"
+elif [ -e "biases" ]; then
+siril -s - << END_OF_SCRIPT
+requires 0.99.10
+
+# Convert Bias Frames to .fit files
+cd biases
+convert bias -out=../process
+cd ../process
+
+# Stack Bias Frames to bias_stacked.fit
+stack bias rej 3 3 -nonorm -out=../masters/masterBias
+cd ..
+END_OF_SCRIPT
+    BIAS_ARG="-bias=../masters/masterBias"
 else 
 	BIAS_ARG="-bias=\"=2048\""
 fi
@@ -80,15 +103,16 @@ fi
 if [ -f "masters/masterDark.fit" ]; then
 	echo "Reusing masterDark"
 	MASTER_DARK_ARG="-dark=../masters/masterDark"
+	BIAS_ARG=""
 	echo "Reusing existing masterDark."
 elif [ -e "darks" ]; then
 	siril -s ${SCRIPT_DIR}/makeMasterDark.ssf
 	rm -rf process
 	MASTER_DARK_ARG="-dark=../masters/masterDark"
+	BIAS_ARG=""
 	echo "Using new masterDark."
 else
 	echo "No darks to process. You may have elavated noise levels and/or hot pixels in the final result."
-	BIAS_ARG="-bias=\"=2048\""
 fi
 
 if [ -d "Light" ]; then
