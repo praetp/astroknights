@@ -8,7 +8,13 @@ set -e
 MODE=3 
 ISO=3200
 SHUTTER_TIME_US=200000
-HOST=192.168.1.203
+HOST=192.168.1.244
+
+if ! ping -c 1 ${HOST};
+then
+	echo "$HOST unreacheable"
+	exit 1
+fi
 
 #
 raspivid -v --mode ${MODE} --settings --contrast 50 --exposure night --roi 0.35,0.35,0.5,0.5 --drc high -ISO ${ISO} -ss ${SHUTTER_TIME_US} --nopreview --vflip --hflip --flush -t 0 -o - | nc ${HOST} 5000
