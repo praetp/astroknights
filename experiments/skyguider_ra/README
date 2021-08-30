@@ -1,0 +1,19 @@
+Connect https://www.sossolutions.nl/2xusbrelais to your rasberry pi and Skyguider pro
+Solderless solutions exist :)
+Detail to follow
+
+Software from
+	https://github.com/darrylb123/usbrelay.git 
+Use it to install usbrelay and python lib
+
+Run ra.py:
+
+Turn ra axis right for 5.5 seconds:
+python3 ra.py r 5500
+
+Turn ra axis left for 5.5 seconds
+python3 ra.py l 5500
+
+
+Ask Kevin for a demo movie ;)
+
