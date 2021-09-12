@@ -19,6 +19,9 @@ if [ -d "process" ]; then
 	rm -rf process
 fi
 
+#remove empty cr2 files
+find -size 0 -name "*.cr2" -print -delete
+
 #make a separate directory for master calibration frames.
 if [ ! -d "masters" ]; then
 	mkdir masters
@@ -135,7 +138,7 @@ preprocess light ${BIAS_ARG} ${MASTER_DARK_ARG} ${MASTER_FLAT_ARG} -cfa -equaliz
 register pp_light
 
 # Stack calibrated lights to result.fit
-stack r_pp_light rej 3 3 -norm=addscale -output_norm -out=../result
+stack r_pp_light rej 3 3 -weighted -norm=addscale -output_norm -out=../result_weighted
 
 cd ..
 close
