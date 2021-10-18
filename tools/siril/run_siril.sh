@@ -54,7 +54,8 @@ cd ..
 END_OF_SCRIPT
     BIAS_ARG="-bias=../masters/masterBias"
 else 
-	BIAS_ARG="-bias=\"=2048\""
+	#BIAS_ARG="-bias=\"=2048\""
+	BIAS_ARG="-bias=\"=40*\$OFFSET\""
 fi
 
 if [ -d "Flat" ]; then
@@ -122,6 +123,8 @@ if [ -d "Light" ]; then
 	ln -sf Light lights
 fi
 
+EQUALIZE_CFA="-equalize_cfa"
+#EQUALIZE_CFA=""
 
 siril -s - <<END_OF_SCRIPT
 requires 0.99.10
@@ -132,13 +135,21 @@ convert light -out=../process
 cd ../process
 
 # Pre-process Light Frames
-preprocess light ${BIAS_ARG} ${MASTER_DARK_ARG} ${MASTER_FLAT_ARG} -cfa -equalize_cfa -debayer
+preprocess light ${BIAS_ARG} ${MASTER_DARK_ARG} ${MASTER_FLAT_ARG} -cfa ${EQUALIZE_CFA} -debayer
 
+# Background extraction
+seqsubsky pp_light 1
+END_OF_SCRIPT
+
+rm process/pp_light_*.fit process/pp_light_.seq #save some space
+
+siril -s - <<END_OF_SCRIPT
+cd process
 # Align lights
-register pp_light
+register bkg_pp_light
 
 # Stack calibrated lights to result.fit
-stack r_pp_light rej 3 3 -weighted -norm=addscale -output_norm -out=../result_weighted
+stack r_bkg_pp_light rej 3 3 -norm=addscale -output_norm -filter-wfwhm=90% -weighted -out=../result
 
 cd ..
 close
