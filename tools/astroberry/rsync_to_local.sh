@@ -5,9 +5,7 @@ set -e
 DEST=${DEST:-/camera}
 while true
 do
-	rsync -av astroberry:/camera $DEST
-	#archive files older than 5 minutes
-	ssh astroberry "find /camera -mmin +5 -type f -exec mv {} /archive \;"
+	rsync -av --remove-source-files astroberry:/camera $DEST
 	sleep 1
 done
 

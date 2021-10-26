@@ -54,8 +54,10 @@ cd ..
 END_OF_SCRIPT
     BIAS_ARG="-bias=../masters/masterBias"
 else 
+	#For Canon
 	#BIAS_ARG="-bias=\"=2048\""
-	BIAS_ARG="-bias=\"=40*\$OFFSET\""
+	#For ZWO with offset 70
+	BIAS_ARG="-bias=\"=2800\""
 fi
 
 if [ -d "Flat" ]; then
