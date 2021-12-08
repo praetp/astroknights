@@ -20,7 +20,7 @@ if [ -d "process" ]; then
 fi
 
 #remove empty cr2 files
-find -size 0 -name "*.cr2" -print -delete
+find -size 0 -print -delete
 
 #make a separate directory for master calibration frames.
 if [ ! -d "masters" ]; then
