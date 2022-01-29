@@ -19,7 +19,7 @@ if [ -d "process" ]; then
 	rm -rf process
 fi
 
-#remove empty cr2 files
+#remove empty files
 find -size 0 -print -delete
 
 #make a separate directory for master calibration frames.
@@ -126,7 +126,18 @@ if [ -d "Light" ]; then
 fi
 
 EQUALIZE_CFA="-equalize_cfa"
-#EQUALIZE_CFA=""
+if [[ "$INPUTTYPE" == "dualband" ]]; then
+	echo "processing dualband input"
+	PREPROCESS_OPTS="-equalize_cfa"
+elif [[ "$INPUTTYPE" == "osc" ]]; then
+	echo "processing osc input"
+	PREPROCESS_OPTS="-equalize_cfa -debayer"
+else
+	echo "Unknown mode $INPUTTYPE. Pass either INPUTTYPE=osc or INPUTTYPE=dualband as env var."
+	exit 1
+fi
+
+
 
 siril -s - <<END_OF_SCRIPT
 requires 0.99.10
@@ -137,16 +148,49 @@ convert light -out=../process
 cd ../process
 
 # Pre-process Light Frames
-preprocess light ${BIAS_ARG} ${MASTER_DARK_ARG} ${MASTER_FLAT_ARG} -cfa ${EQUALIZE_CFA} -debayer
+preprocess light ${BIAS_ARG} ${MASTER_DARK_ARG} ${MASTER_FLAT_ARG} -cfa ${PREPROCESS_OPTS}
+END_OF_SCRIPT
+
+if [[ "$INPUTTYPE" == "dualband" ]]; then
+	echo "processing Halpha"
+siril -s - <<END_OF_SCRIPT_DUALBAND_HA
+requires 0.99.10
+cd process
+# Extract Ha and OIII
+seqextract_HaOIII pp_light
+
+# Align Ha lights
+register Ha_pp_light -drizzle
+
+# Stack calibrated Ha lights to Ha_result.fit
+stack r_Ha_pp_light rej 3 3 -norm=addscale -output_norm -out=../Ha_result
+
+END_OF_SCRIPT_DUALBAND_HA
+	echo "processing OIII"
+siril -s - <<END_OF_SCRIPT_DUALBAND_OIII
+requires 0.99.10
+cd process
+# Align OIII lights
+register OIII_pp_light -drizzle
+
+# Stack calibrated Ha lights to OIII_result.fit
+stack r_OIII_pp_light rej 3 3 -norm=addscale -output_norm -out=../OIII_result
+cd ..
+
+# Make linear match on OIII frame based upon Ha frame
+load OIII_result
+linear_match Ha_result 0 0.92
+save OIII_result
+
+END_OF_SCRIPT_DUALBAND_OIII
+elif [[ "$INPUTTYPE" == "osc" ]]; then
+siril -s - <<END_OF_SCRIPT_OSC
+requires 0.99.10
+cd process
 
 # Background extraction
 seqsubsky pp_light 1
-END_OF_SCRIPT
 
-rm process/pp_light_*.fit process/pp_light_.seq #save some space
-
-siril -s - <<END_OF_SCRIPT
-cd process
 # Align lights
 register bkg_pp_light
 
@@ -156,5 +200,6 @@ stack r_bkg_pp_light rej 3 3 -norm=addscale -output_norm -filter-wfwhm=90% -weig
 cd ..
 close
 
-END_OF_SCRIPT
+END_OF_SCRIPT_OSC
+fi
 echo "Processing completed successfully"
