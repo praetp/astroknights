@@ -184,12 +184,20 @@ save OIII_result
 
 END_OF_SCRIPT_DUALBAND_OIII
 elif [[ "$INPUTTYPE" == "osc" ]]; then
-siril -s - <<END_OF_SCRIPT_OSC
+siril -s - <<END_OF_SCRIPT_BG_OSC
 requires 0.99.10
 cd process
 
-# Background extraction
 seqsubsky pp_light 1
+
+close
+
+END_OF_SCRIPT_BG_OSC
+rm -rf process/pp* #save some space
+
+siril -s - <<END_OF_SCRIPT_OSC
+requires 0.99.10
+cd process
 
 # Align lights
 register bkg_pp_light
