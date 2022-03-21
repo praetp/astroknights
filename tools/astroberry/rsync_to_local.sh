@@ -6,7 +6,7 @@ DEST=${DEST:-/camera}
 while true
 do
 	set +e
-	rsync -av --remove-source-files astroberry:/camera $DEST
+	rsync -av --remove-source-files astroberry.local:/camera $DEST
 	set -e
 	sleep 1
 done
