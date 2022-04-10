@@ -4,7 +4,6 @@ set -xEeuo pipefail
 
 #This script will process flats, darks and lights.
 #It's not a problem if flats and/or darks are missing
-#There is no support for biases currently, we use a hardcoded synthetic bias instead.
 #If the input directories are named incorrectly (e.g. after copying from EKOS), this is not a problem.
 
 #For now this script must be run from the directory where the Lights/ Flats/ .. directories are
@@ -61,6 +60,7 @@ else
 fi
 
 if [ -d "Flat" ]; then
+	find Flat -mindepth 1 -name "*.fits" -exec mv {} Flat \;
 	#only create link if not empty
 	if [ ! -e "flats" ]; then
 		if [ ! -z "$(ls -A Flat)" ]; then
@@ -122,6 +122,7 @@ else
 fi
 
 if [ -d "Light" ]; then
+	find Light -mindepth 1 -name "*.fits" -exec mv {} Light \;
 	ln -sf Light lights
 fi
 
