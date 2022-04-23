@@ -13,6 +13,8 @@ SCRIPT_DIR=$(realpath $BASH_SOURCE)/../scripts
 MASTER_FLAT_ARG=""
 MASTER_DARK_ARG=""
 BIAS_ARG=""
+DRIZZLE="-drizzle"
+DRIZZLE="" #uncomment to enable drizzle
 
 if [ -d "process" ]; then
 	rm -rf process
@@ -57,6 +59,7 @@ else
 	#BIAS_ARG="-bias=\"=2048\""
 	#For ZWO with offset 70
 	BIAS_ARG="-bias=\"=2800\""
+	BIAS_ARG='-bias="=40*$OFFSET"'
 fi
 
 if [ -d "Flat" ]; then
@@ -157,14 +160,15 @@ if [[ "$INPUTTYPE" == "dualband" ]]; then
 siril -s - <<END_OF_SCRIPT_DUALBAND_HA
 requires 0.99.10
 cd process
+seqsubsky pp_light 1
 # Extract Ha and OIII
-seqextract_HaOIII pp_light
+seqextract_HaOIII bkg_pp_light
 
 # Align Ha lights
-register Ha_pp_light -drizzle
+register Ha_bkg_pp_light -drizzle
 
 # Stack calibrated Ha lights to Ha_result.fit
-stack r_Ha_pp_light rej 3 3 -norm=addscale -output_norm -out=../Ha_result
+stack r_Ha_bkg_pp_light rej 3 3 -norm=addscale -output_norm -out=../Ha_result
 
 END_OF_SCRIPT_DUALBAND_HA
 	echo "processing OIII"
@@ -172,10 +176,10 @@ siril -s - <<END_OF_SCRIPT_DUALBAND_OIII
 requires 0.99.10
 cd process
 # Align OIII lights
-register OIII_pp_light -drizzle
+register OIII_bkg_pp_light -drizzle
 
 # Stack calibrated Ha lights to OIII_result.fit
-stack r_OIII_pp_light rej 3 3 -norm=addscale -output_norm -out=../OIII_result
+stack r_OIII_bkg_pp_light rej 3 3 -norm=addscale -output_norm -out=../OIII_result
 cd ..
 
 # Make linear match on OIII frame based upon Ha frame
@@ -201,7 +205,7 @@ requires 0.99.10
 cd process
 
 # Align lights
-register bkg_pp_light
+register bkg_pp_light ${DRIZZLE}
 
 # Stack calibrated lights to result.fit
 stack r_bkg_pp_light rej 3 3 -norm=addscale -output_norm -filter-wfwhm=90% -weighted -out=../result
