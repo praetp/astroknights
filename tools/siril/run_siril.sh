@@ -57,9 +57,9 @@ END_OF_SCRIPT
 else 
 	#For Canon
 	#BIAS_ARG="-bias=\"=2048\""
-	#For ZWO with offset 70
-	BIAS_ARG="-bias=\"=2800\""
+	#For ZWO 533
 	BIAS_ARG='-bias="=40*$OFFSET"'
+	SYNTHBIAS=1
 fi
 
 if [ -d "Flat" ]; then
@@ -99,6 +99,7 @@ END_OF_SCRIPT
 else
 	echo "No flats to process. You may have vignetting and unwanted artifacts in the final result."
 fi
+#BIAS_ARG=""
 
 if [ -d "Dark" ]; then
 	#only create link if not empty
@@ -112,13 +113,11 @@ fi
 if [ -f "masters/masterDark.fit" ]; then
 	echo "Reusing masterDark"
 	MASTER_DARK_ARG="-dark=../masters/masterDark"
-	BIAS_ARG=""
 	echo "Reusing existing masterDark."
 elif [ -e "darks" ]; then
 	siril -s ${SCRIPT_DIR}/makeMasterDark.ssf
 	rm -rf process
 	MASTER_DARK_ARG="-dark=../masters/masterDark"
-	BIAS_ARG=""
 	echo "Using new masterDark."
 else
 	echo "No darks to process. You may have elavated noise levels and/or hot pixels in the final result."
@@ -129,7 +128,6 @@ if [ -d "Light" ]; then
 	ln -sf Light lights
 fi
 
-EQUALIZE_CFA="-equalize_cfa"
 if [[ "$INPUTTYPE" == "dualband" ]]; then
 	echo "processing dualband input"
 	PREPROCESS_OPTS="-equalize_cfa"
