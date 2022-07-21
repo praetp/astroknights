@@ -1,0 +1,120 @@
+<INDIDriver>
+    <newSwitchVector device="Manual Filter" name="DEBUG">
+        <oneSwitch name="ENABLE">
+Off
+        </oneSwitch>
+        <oneSwitch name="DISABLE">
+On
+        </oneSwitch>
+    </newSwitchVector>
+    <newNumberVector device="Manual Filter" name="POLLING_PERIOD">
+        <oneNumber name="PERIOD_MS">
+1000
+        </oneNumber>
+    </newNumberVector>
+    <newSwitchVector device="Manual Filter" name="DEBUG_LEVEL">
+        <oneSwitch name="DBG_ERROR">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_WARNING">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_SESSION">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_DEBUG">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Manual Filter" name="LOGGING_LEVEL">
+        <oneSwitch name="LOG_ERROR">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_WARNING">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_SESSION">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_DEBUG">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Manual Filter" name="LOG_OUTPUT">
+        <oneSwitch name="CLIENT_DEBUG">
+On
+        </oneSwitch>
+        <oneSwitch name="FILE_DEBUG">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newNumberVector device="Manual Filter" name="FILTER_SLOT">
+        <oneNumber name="FILTER_SLOT_VALUE">
+1
+        </oneNumber>
+    </newNumberVector>
+    <newTextVector device="Manual Filter" name="FILTER_NAME">
+        <oneText name="FILTER_SLOT_NAME_1">
+      L_Pro
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_2">
+      L_Extreme
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_3">
+      L2_Astronomik
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_4">
+      Optolong_UVIR_Cut
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_5">
+      SII
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_6">
+      OIII
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_7">
+      LPR
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_8">
+      Luminance
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_9">
+      No_filter
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_10">
+      L_Pro
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_11">
+      L_Extreme
+        </oneText>
+        <oneText name="FILTER_SLOT_NAME_12">
+      Filter#12
+        </oneText>
+    </newTextVector>
+    <newSwitchVector device="Manual Filter" name="USEJOYSTICK">
+        <oneSwitch name="ENABLE">
+Off
+        </oneSwitch>
+        <oneSwitch name="DISABLE">
+On
+        </oneSwitch>
+    </newSwitchVector>
+    <newTextVector device="Manual Filter" name="JOYSTICKSETTINGS">
+        <oneText name="Change Filter">
+JOYSTICK_1
+        </oneText>
+        <oneText name="Reset">
+BUTTON_1
+        </oneText>
+    </newTextVector>
+    <newTextVector device="Manual Filter" name="SNOOP_JOYSTICK">
+        <oneText name="SNOOP_JOYSTICK_DEVICE">
+Joystick
+        </oneText>
+    </newTextVector>
+    <newNumberVector device="Manual Filter" name="MAX_FILTERS">
+        <oneNumber name="MAX">
+5
+        </oneNumber>
+    </newNumberVector>
+</INDIDriver>

@@ -1,0 +1,91 @@
+<scopeconfig>
+    <device name="Telescope Simulator">
+        <config1>
+            <scopefoc>
+150.000000
+            </scopefoc>
+            <scopeap>
+30.000000
+            </scopeap>
+            <gscopefoc>
+125.000000
+            </gscopefoc>
+            <gscopeap>
+32.000000
+            </gscopeap>
+            <label>
+tamron_150
+            </label>
+        </config1>
+        <config2>
+            <scopefoc>
+600.000000
+            </scopefoc>
+            <scopeap>
+90.000000
+            </scopeap>
+            <gscopefoc>
+125.000000
+            </gscopefoc>
+            <gscopeap>
+32.000000
+            </gscopeap>
+            <label>
+tamron_600
+            </label>
+        </config2>
+    </device>
+    <device name="iOptron SkyGuider Pro">
+        <config1>
+            <scopefoc>
+250.000000
+            </scopefoc>
+            <scopeap>
+51.000000
+            </scopeap>
+            <gscopefoc>
+128.000000
+            </gscopefoc>
+            <gscopeap>
+32.000000
+            </gscopeap>
+            <label>
+tamron_150
+            </label>
+        </config1>
+        <config2>
+            <scopefoc>
+600.000000
+            </scopefoc>
+            <scopeap>
+90.000000
+            </scopeap>
+            <gscopefoc>
+125.000000
+            </gscopefoc>
+            <gscopeap>
+32.000000
+            </gscopeap>
+            <label>
+tamron_600
+            </label>
+        </config2>
+    </device>
+    <device name="EQMod Mount">
+        <config1>
+            <scopefoc>
+800.000000
+            </scopefoc>
+            <scopeap>
+115.000000
+            </scopeap>
+            <gscopefoc>
+128.000000
+            </gscopefoc>
+            <gscopeap>
+32.000000
+            </gscopeap>
+            <label/>
+        </config1>
+    </device>
+</scopeconfig>

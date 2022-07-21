@@ -1,0 +1,284 @@
+<INDIDriver>
+    <newNumberVector device="Canon DSLR EOS 600D" name="CCD_INFO">
+        <oneNumber name="CCD_MAX_X">
+      5202
+        </oneNumber>
+        <oneNumber name="CCD_MAX_Y">
+      3465
+        </oneNumber>
+        <oneNumber name="CCD_PIXEL_SIZE">
+      4.2899999618530273438
+        </oneNumber>
+        <oneNumber name="CCD_PIXEL_SIZE_X">
+      4.2899999618530273438
+        </oneNumber>
+        <oneNumber name="CCD_PIXEL_SIZE_Y">
+      4.2899999618530273438
+        </oneNumber>
+        <oneNumber name="CCD_BITSPERPIXEL">
+      8
+        </oneNumber>
+    </newNumberVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="DEBUG">
+        <oneSwitch name="ENABLE">
+On
+        </oneSwitch>
+        <oneSwitch name="DISABLE">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newNumberVector device="Canon DSLR EOS 600D" name="POLLING_PERIOD">
+        <oneNumber name="PERIOD_MS">
+1000
+        </oneNumber>
+    </newNumberVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="DEBUG_LEVEL">
+        <oneSwitch name="DBG_ERROR">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_WARNING">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_SESSION">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_DEBUG">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_EXTRA_1">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="LOGGING_LEVEL">
+        <oneSwitch name="LOG_ERROR">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_WARNING">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_SESSION">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_DEBUG">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_EXTRA_1">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="LOG_OUTPUT">
+        <oneSwitch name="CLIENT_DEBUG">
+On
+        </oneSwitch>
+        <oneSwitch name="FILE_DEBUG">
+On
+        </oneSwitch>
+    </newSwitchVector>
+    <newTextVector device="Canon DSLR EOS 600D" name="ACTIVE_DEVICES">
+        <oneText name="ACTIVE_TELESCOPE">
+iOptron SkyGuider Pro
+        </oneText>
+        <oneText name="ACTIVE_ROTATOR">
+Rotator Simulator
+        </oneText>
+        <oneText name="ACTIVE_FOCUSER">
+Focuser Simulator
+        </oneText>
+        <oneText name="ACTIVE_FILTER">
+CCD Simulator
+        </oneText>
+        <oneText name="ACTIVE_SKYQUALITY">
+SQM
+        </oneText>
+    </newTextVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="UPLOAD_MODE">
+        <oneSwitch name="UPLOAD_CLIENT">
+On
+        </oneSwitch>
+        <oneSwitch name="UPLOAD_LOCAL">
+Off
+        </oneSwitch>
+        <oneSwitch name="UPLOAD_BOTH">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newTextVector device="Canon DSLR EOS 600D" name="UPLOAD_SETTINGS">
+        <oneText name="UPLOAD_DIR">
+/camera/Light
+        </oneText>
+        <oneText name="UPLOAD_PREFIX">
+Light_180_secs_ISO8601_XXX
+        </oneText>
+    </newTextVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="TELESCOPE_TYPE">
+        <oneSwitch name="TELESCOPE_PRIMARY">
+On
+        </oneSwitch>
+        <oneSwitch name="TELESCOPE_GUIDE">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="CCD_COMPRESSION">
+        <oneSwitch name="CCD_COMPRESS">
+Off
+        </oneSwitch>
+        <oneSwitch name="CCD_RAW">
+On
+        </oneSwitch>
+    </newSwitchVector>
+    <newNumberVector device="Canon DSLR EOS 600D" name="CCD_FRAME">
+        <oneNumber name="X">
+0
+        </oneNumber>
+        <oneNumber name="Y">
+0
+        </oneNumber>
+        <oneNumber name="WIDTH">
+5202
+        </oneNumber>
+        <oneNumber name="HEIGHT">
+3465
+        </oneNumber>
+    </newNumberVector>
+    <newTextVector device="Canon DSLR EOS 600D" name="CCD_CFA">
+        <oneText name="CFA_OFFSET_X">
+0
+        </oneText>
+        <oneText name="CFA_OFFSET_Y">
+0
+        </oneText>
+        <oneText name="CFA_TYPE">
+RGGB
+        </oneText>
+    </newTextVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="CCD_STREAM_ENCODER">
+        <oneSwitch name="RAW">
+On
+        </oneSwitch>
+        <oneSwitch name="MJPEG">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newTextVector device="Canon DSLR EOS 600D" name="RECORD_FILE">
+        <oneText name="RECORD_FILE_DIR">
+/home/astroberry/indi__D_
+        </oneText>
+        <oneText name="RECORD_FILE_NAME">
+indi_record__T_
+        </oneText>
+    </newTextVector>
+    <newNumberVector device="Canon DSLR EOS 600D" name="RECORD_OPTIONS">
+        <oneNumber name="RECORD_DURATION">
+1
+        </oneNumber>
+        <oneNumber name="RECORD_FRAME_TOTAL">
+30
+        </oneNumber>
+    </newNumberVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="CCD_STREAM_RECORDER">
+        <oneSwitch name="SER">
+On
+        </oneSwitch>
+        <oneSwitch name="OGV">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newNumberVector device="Canon DSLR EOS 600D" name="MIRROR_LOCK">
+        <oneNumber name="MIRROR_LOCK_SECONDS">
+0
+        </oneNumber>
+    </newNumberVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="CCD_CAPTURE_TARGET">
+        <oneSwitch name="RAM">
+On
+        </oneSwitch>
+        <oneSwitch name="SD Card">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="CCD_SD_CARD_ACTION">
+        <oneSwitch name="Save">
+On
+        </oneSwitch>
+        <oneSwitch name="Delete">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="CCD_ISO">
+        <oneSwitch name="ISO0">
+Off
+        </oneSwitch>
+        <oneSwitch name="ISO1">
+Off
+        </oneSwitch>
+        <oneSwitch name="ISO2">
+Off
+        </oneSwitch>
+        <oneSwitch name="ISO3">
+Off
+        </oneSwitch>
+        <oneSwitch name="ISO4">
+Off
+        </oneSwitch>
+        <oneSwitch name="ISO5">
+Off
+        </oneSwitch>
+        <oneSwitch name="ISO6">
+Off
+        </oneSwitch>
+        <oneSwitch name="ISO7">
+On
+        </oneSwitch>
+        <oneSwitch name="ISO8">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="CAPTURE_FORMAT">
+        <oneSwitch name="FORMAT0">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT1">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT2">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT3">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT4">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT5">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT6">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT7">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT8">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT9">
+On
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="CCD_TRANSFER_FORMAT">
+        <oneSwitch name="FORMAT_FITS">
+On
+        </oneSwitch>
+        <oneSwitch name="FORMAT_NATIVE">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="Canon DSLR EOS 600D" name="CCD_FORCE_BLOB">
+        <oneSwitch name="On">
+Off
+        </oneSwitch>
+        <oneSwitch name="Off">
+On
+        </oneSwitch>
+    </newSwitchVector>
+</INDIDriver>

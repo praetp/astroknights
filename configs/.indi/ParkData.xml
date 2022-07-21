@@ -1,0 +1,28 @@
+<parkdata>
+    <device name="iOptron SkyGuider Pro">
+        <parkstatus>
+false
+        </parkstatus>
+        <parkposition>
+            <axis1position>
+-6.000000
+            </axis1position>
+            <axis2position>
+0.000000
+            </axis2position>
+        </parkposition>
+    </device>
+    <device name="EQMod Mount">
+        <parkstatus>
+true
+        </parkstatus>
+        <parkposition>
+            <axis1position>
+8388608.000000
+            </axis1position>
+            <axis2position>
+10644608.000000
+            </axis2position>
+        </parkposition>
+    </device>
+</parkdata>

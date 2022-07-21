@@ -1,0 +1,141 @@
+<INDIDriver>
+    <newSwitchVector device="ASI EAF" name="DEBUG">
+        <oneSwitch name="ENABLE">
+Off
+        </oneSwitch>
+        <oneSwitch name="DISABLE">
+On
+        </oneSwitch>
+    </newSwitchVector>
+    <newNumberVector device="ASI EAF" name="POLLING_PERIOD">
+        <oneNumber name="PERIOD_MS">
+500
+        </oneNumber>
+    </newNumberVector>
+    <newSwitchVector device="ASI EAF" name="DEBUG_LEVEL">
+        <oneSwitch name="DBG_ERROR">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_WARNING">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_SESSION">
+On
+        </oneSwitch>
+        <oneSwitch name="DBG_DEBUG">
+Off
+        </oneSwitch>
+        <oneSwitch name="DBG_EXTRA_1">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="ASI EAF" name="LOGGING_LEVEL">
+        <oneSwitch name="LOG_ERROR">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_WARNING">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_SESSION">
+On
+        </oneSwitch>
+        <oneSwitch name="LOG_DEBUG">
+Off
+        </oneSwitch>
+        <oneSwitch name="LOG_EXTRA_1">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="ASI EAF" name="LOG_OUTPUT">
+        <oneSwitch name="CLIENT_DEBUG">
+On
+        </oneSwitch>
+        <oneSwitch name="FILE_DEBUG">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newNumberVector device="ASI EAF" name="FOCUS_MAX">
+        <oneNumber name="FOCUS_MAX_VALUE">
+30001
+        </oneNumber>
+    </newNumberVector>
+    <newSwitchVector device="ASI EAF" name="FOCUS_REVERSE_MOTION">
+        <oneSwitch name="INDI_ENABLED">
+On
+        </oneSwitch>
+        <oneSwitch name="INDI_DISABLED">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newSwitchVector device="ASI EAF" name="FOCUS_BACKLASH_TOGGLE">
+        <oneSwitch name="INDI_ENABLED">
+On
+        </oneSwitch>
+        <oneSwitch name="INDI_DISABLED">
+Off
+        </oneSwitch>
+    </newSwitchVector>
+    <newNumberVector device="ASI EAF" name="FOCUS_BACKLASH_STEPS">
+        <oneNumber name="FOCUS_BACKLASH_VALUE">
+      45
+        </oneNumber>
+    </newNumberVector>
+    <newNumberVector device="ASI EAF" name="Presets">
+        <oneNumber name="PRESET_1">
+0
+        </oneNumber>
+        <oneNumber name="PRESET_2">
+0
+        </oneNumber>
+        <oneNumber name="PRESET_3">
+0
+        </oneNumber>
+    </newNumberVector>
+    <newSwitchVector device="ASI EAF" name="USEJOYSTICK">
+        <oneSwitch name="ENABLE">
+Off
+        </oneSwitch>
+        <oneSwitch name="DISABLE">
+On
+        </oneSwitch>
+    </newSwitchVector>
+    <newTextVector device="ASI EAF" name="JOYSTICKSETTINGS">
+        <oneText name="Focus In">
+BUTTON_1
+        </oneText>
+        <oneText name="Focus Out">
+BUTTON_2
+        </oneText>
+        <oneText name="Abort Focus">
+BUTTON_3
+        </oneText>
+    </newTextVector>
+    <newTextVector device="ASI EAF" name="SNOOP_JOYSTICK">
+        <oneText name="SNOOP_JOYSTICK_DEVICE">
+Joystick
+        </oneText>
+    </newTextVector>
+    <newNumberVector device="ASI EAF" name="TEMPC_STEPSDEG">
+        <oneNumber name="STEPS">
+25
+        </oneNumber>
+    </newNumberVector>
+    <newNumberVector device="ASI EAF" name="TEMPC_HYSTERESIS">
+        <oneNumber name="HYSTERESIS">
+0.50000000000000011102
+        </oneNumber>
+    </newNumberVector>
+    <newNumberVector device="ASI EAF" name="TEMPC_SAMPLES">
+        <oneNumber name="SAMPLES">
+5
+        </oneNumber>
+    </newNumberVector>
+    <newSwitchVector device="ASI EAF" name="TEMPC_SWITCH">
+        <oneSwitch name="ON">
+Off
+        </oneSwitch>
+        <oneSwitch name="OFF">
+On
+        </oneSwitch>
+    </newSwitchVector>
+</INDIDriver>
