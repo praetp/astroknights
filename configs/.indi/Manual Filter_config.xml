@@ -55,40 +55,16 @@ Off
     </newNumberVector>
     <newTextVector device="Manual Filter" name="FILTER_NAME">
         <oneText name="FILTER_SLOT_NAME_1">
-      L_Pro
+L_Pro
         </oneText>
         <oneText name="FILTER_SLOT_NAME_2">
-      L_Extreme
+L_Extreme
         </oneText>
         <oneText name="FILTER_SLOT_NAME_3">
-      L2_Astronomik
+L2_Astronomik
         </oneText>
         <oneText name="FILTER_SLOT_NAME_4">
-      Optolong_UVIR_Cut
-        </oneText>
-        <oneText name="FILTER_SLOT_NAME_5">
-      SII
-        </oneText>
-        <oneText name="FILTER_SLOT_NAME_6">
-      OIII
-        </oneText>
-        <oneText name="FILTER_SLOT_NAME_7">
-      LPR
-        </oneText>
-        <oneText name="FILTER_SLOT_NAME_8">
-      Luminance
-        </oneText>
-        <oneText name="FILTER_SLOT_NAME_9">
-      No_filter
-        </oneText>
-        <oneText name="FILTER_SLOT_NAME_10">
-      L_Pro
-        </oneText>
-        <oneText name="FILTER_SLOT_NAME_11">
-      L_Extreme
-        </oneText>
-        <oneText name="FILTER_SLOT_NAME_12">
-      Filter#12
+Optolong_UVIR_Cut
         </oneText>
     </newTextVector>
     <newSwitchVector device="Manual Filter" name="USEJOYSTICK">
@@ -114,7 +90,7 @@ Joystick
     </newTextVector>
     <newNumberVector device="Manual Filter" name="MAX_FILTERS">
         <oneNumber name="MAX">
-5
+      5
         </oneNumber>
     </newNumberVector>
 </INDIDriver>
