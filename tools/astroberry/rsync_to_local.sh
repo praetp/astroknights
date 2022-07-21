@@ -7,6 +7,12 @@ while true
 do
 	set +e
 	rsync -av --remove-source-files astroberry:/camera $DEST
+	rsync -av --copy-links --remove-source-files astroberry:logs/autofocus $DEST/camera/logs
+
+	rsync -av --copy-links astroberry:logs/analyze $DEST/camera/logs
+	rsync -av --copy-links astroberry:logs/indilogs $DEST/camera/logs
+	rsync -av --copy-links astroberry:logs/kstarslogs $DEST/camera/logs
+	rsync -av --copy-links astroberry:logs/focuslogs $DEST/camera/logs
 	set -e
 	sleep 1
 done
