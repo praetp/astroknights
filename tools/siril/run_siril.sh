@@ -206,7 +206,8 @@ cd process
 register bkg_pp_light ${DRIZZLE}
 
 # Stack calibrated lights to result.fit
-stack r_bkg_pp_light rej 3 3 -norm=addscale -output_norm -filter-wfwhm=90% -weighted -out=../result
+#stack r_bkg_pp_light rej 3 3 -norm=addscale -output_norm -filter-wfwhm=90% -weighted -out=../result
+stack r_bkg_pp_light rej 3 3 -norm=addscale -output_norm -filter-fwhm=4 -weighted -out=../result
 
 cd ..
 close
