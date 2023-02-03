@@ -4,4 +4,4 @@ in astrophotography using the [iOptron SkyGuider Pro](https://www.ioptron.com/pr
 
 No guarantees on the contents of this repo can be given.
 
-Photos can be viewed on [Telescopius](https://telescopius.com/profile/spetsnaz84).
+Photos can be viewed on [Telescopius](https://telescopius.com/profile/praetp).
