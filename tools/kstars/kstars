@@ -1,2 +1,0 @@
-#!/bin/bash
-kstars $(ls -t1 *.fits | head -n 1)
