@@ -1,10 +1,10 @@
 <INDIDriver>
     <newSwitchVector device="ASI EAF" name="DEBUG">
         <oneSwitch name="ENABLE">
-Off
+On
         </oneSwitch>
         <oneSwitch name="DISABLE">
-On
+Off
         </oneSwitch>
     </newSwitchVector>
     <newNumberVector device="ASI EAF" name="POLLING_PERIOD">
@@ -23,10 +23,10 @@ On
 On
         </oneSwitch>
         <oneSwitch name="DBG_DEBUG">
-Off
+On
         </oneSwitch>
         <oneSwitch name="DBG_EXTRA_1">
-Off
+On
         </oneSwitch>
     </newSwitchVector>
     <newSwitchVector device="ASI EAF" name="LOGGING_LEVEL">
@@ -40,7 +40,7 @@ On
 On
         </oneSwitch>
         <oneSwitch name="LOG_DEBUG">
-Off
+On
         </oneSwitch>
         <oneSwitch name="LOG_EXTRA_1">
 Off
@@ -56,7 +56,7 @@ Off
     </newSwitchVector>
     <newNumberVector device="ASI EAF" name="FOCUS_MAX">
         <oneNumber name="FOCUS_MAX_VALUE">
-30001
+30000
         </oneNumber>
     </newNumberVector>
     <newSwitchVector device="ASI EAF" name="FOCUS_REVERSE_MOTION">
@@ -117,7 +117,7 @@ Joystick
     </newTextVector>
     <newNumberVector device="ASI EAF" name="TEMPC_STEPSDEG">
         <oneNumber name="STEPS">
-25
+5
         </oneNumber>
     </newNumberVector>
     <newNumberVector device="ASI EAF" name="TEMPC_HYSTERESIS">

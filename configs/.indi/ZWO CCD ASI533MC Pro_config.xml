@@ -23,10 +23,10 @@ On
 On
         </oneSwitch>
         <oneSwitch name="DBG_DEBUG">
-Off
+On
         </oneSwitch>
         <oneSwitch name="DBG_EXTRA_1">
-Off
+On
         </oneSwitch>
     </newSwitchVector>
     <newSwitchVector device="ZWO CCD ASI120MM Mini" name="LOGGING_LEVEL">
@@ -84,10 +84,10 @@ Off
     </newSwitchVector>
     <newTextVector device="ZWO CCD ASI533MC Pro" name="UPLOAD_SETTINGS">
         <oneText name="UPLOAD_DIR">
-/home/astroberry
+/camera/M_3/Light/Optolong_UVIR_Cut
         </oneText>
         <oneText name="UPLOAD_PREFIX">
-IMAGE_XXX
+M_3_Light_Optolong_UVIR_Cut_60_secs_ISO8601_XXX
         </oneText>
     </newTextVector>
     <newSwitchVector device="ZWO CCD ASI533MC Pro" name="TELESCOPE_TYPE">
@@ -152,18 +152,18 @@ Off
 0
         </oneNumber>
         <oneNumber name="WIDTH">
-3000
+3008
         </oneNumber>
         <oneNumber name="HEIGHT">
-3006
+3008
         </oneNumber>
     </newNumberVector>
     <newNumberVector device="ZWO CCD ASI533MC Pro" name="CCD_BINNING">
         <oneNumber name="HOR_BIN">
-3
+1
         </oneNumber>
         <oneNumber name="VER_BIN">
-3
+1
         </oneNumber>
     </newNumberVector>
     <newTextVector device="ZWO CCD ASI533MC Pro" name="CCD_CFA">
@@ -227,7 +227,7 @@ Off
     </newSwitchVector>
     <newNumberVector device="ZWO CCD ASI533MC Pro" name="CCD_CONTROLS">
         <oneNumber name="Gain">
-100
+222
         </oneNumber>
         <oneNumber name="WB_R">
 50

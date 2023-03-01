@@ -131,13 +131,13 @@ Off
     </newSwitchVector>
     <newNumberVector device="EQMod Mount" name="GEOGRAPHIC_COORD">
         <oneNumber name="LAT">
-      51.208960199999999929
+      51.216666666666668561
         </oneNumber>
         <oneNumber name="LONG">
-      4.4272838999999999388
+      4.4000000000000003553
         </oneNumber>
         <oneNumber name="ELEV">
-      5
+      8.9799995399999996692
         </oneNumber>
     </newNumberVector>
     <newSwitchVector device="EQMod Mount" name="TELESCOPE_REVERSE_MOTION">
@@ -337,7 +337,7 @@ Off
     </newSwitchVector>
     <newSwitchVector device="EQMod Mount" name="HORIZONLIMITSONLIMIT">
         <oneSwitch name="HORIZONLIMITSONLIMITTRACK">
-On
+Off
         </oneSwitch>
         <oneSwitch name="HORIZONLIMITSONLIMITSLEW">
 Off
@@ -348,10 +348,10 @@ Off
     </newSwitchVector>
     <newSwitchVector device="EQMod Mount" name="HORIZONLIMITSLIMITGOTO">
         <oneSwitch name="HORIZONLIMITSLIMITGOTODISABLE">
-Off
+On
         </oneSwitch>
         <oneSwitch name="HORIZONLIMITSLIMITGOTOENABLE">
-On
+Off
         </oneSwitch>
     </newSwitchVector>
 </INDIDriver>
