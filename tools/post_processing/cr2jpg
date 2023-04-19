@@ -12,13 +12,13 @@ fi
 if [ $# -eq 0 ]
 then
 	#no arguments
-	for raw in *.cr2
+	for raw in *.CR2
 	do
-		darktable-cli $raw jpg/$raw.jpg
+		darktable-cli $raw -width 1920 jpg/$raw.jpg
 	done
 else 
 	for raw in "$@"
 	do
-		darktable-cli $raw jpg/$raw.jpg
+		darktable-cli $raw -width 1920 jpg/$raw.jpg
 	done
 fi
