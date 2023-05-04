@@ -42,9 +42,10 @@ if [ -e "masters/masterBias.fit" ]; then
 	BIAS_ARG="-bias=../masters/masterBias"
 elif [ -e "biases" ]; then
 siril -s - << END_OF_SCRIPT
-requires 0.99.10
+requires 1.2.0
 
 # Convert Bias Frames to .fit files
+cd "$PWD"
 cd biases
 convert bias -out=../process
 cd ../process
@@ -78,9 +79,10 @@ if [ -f "masters/masterFlat.fit" ]; then
 elif [ -e "flats" ]; then
 
 siril -s - <<END_OF_SCRIPT
-requires 0.99.10
+requires 1.2.0
 
 # Convert Flat Frames to .fit files
+cd "$PWD"
 cd flats
 convert flat -out=../process
 cd ../process
@@ -112,20 +114,38 @@ fi
 
 if [ -f "masters/masterDark.fit" ]; then
 	echo "Reusing masterDark"
-	MASTER_DARK_ARG="-dark=../masters/masterDark"
+	MASTER_DARK_ARG="-dark=../masters/masterDark -cc=dark"
 	echo "Reusing existing masterDark."
 elif [ -e "darks" ]; then
-	siril -s ${SCRIPT_DIR}/makeMasterDark.ssf
+	cd "$PWD"
+siril -s - <<END_OF_SCRIPT
+requires 1.2.0
+
+# Convert Dark Frames to .fit files
+cd darks
+convert dark -out=../process
+cd ../process
+
+# Stack Dark Frames to dark_stacked.fit
+stack dark rej 3 3 -nonorm -out=../masters/masterDark
+cd ..
+
+END_OF_SCRIPT
 	rm -rf process
-	MASTER_DARK_ARG="-dark=../masters/masterDark"
+	MASTER_DARK_ARG="-dark=../masters/masterDark -cc=dark"
 	echo "Using new masterDark."
 else
 	echo "No darks to process. You may have elavated noise levels and/or hot pixels in the final result."
 fi
 
 if [ -d "Light" ]; then
-	find Light -mindepth 1 -name "*.fits" -exec mv {} Light \;
-	ln -sf Light lights
+	if [ ! -d "lights" ]; then
+		mkdir lights
+	fi
+	cd lights
+	#create symlink for every file
+	find ../Light -mindepth 1 -name "*.fits" -exec ln -sf {} \;
+	cd -
 fi
 
 if [[ "$INPUTTYPE" == "dualband" ]]; then
@@ -142,21 +162,23 @@ fi
 
 
 siril -s - <<END_OF_SCRIPT
-requires 0.99.10
+requires 1.2.0
 
 # Convert Light Frames to .fit files
+cd "$PWD"
 cd lights
 convert light -out=../process
 cd ../process
 
 # Pre-process Light Frames
-preprocess light ${BIAS_ARG} ${MASTER_DARK_ARG} ${MASTER_FLAT_ARG} -cfa ${PREPROCESS_OPTS}
+calibrate light ${BIAS_ARG} ${MASTER_DARK_ARG} ${MASTER_FLAT_ARG} -cfa ${PREPROCESS_OPTS}
 END_OF_SCRIPT
 
 if [[ "$INPUTTYPE" == "dualband" ]]; then
 	echo "processing Halpha"
 siril -s - <<END_OF_SCRIPT_DUALBAND_HA
-requires 0.99.10
+requires 1.2.0
+cd "$PWD"
 cd process
 seqsubsky pp_light 1
 # Extract Ha and OIII
@@ -171,7 +193,8 @@ stack r_Ha_bkg_pp_light rej 3 3 -norm=addscale -output_norm -out=../Ha_result
 END_OF_SCRIPT_DUALBAND_HA
 	echo "processing OIII"
 siril -s - <<END_OF_SCRIPT_DUALBAND_OIII
-requires 0.99.10
+requires 1.2.0
+cd "$PWD"
 cd process
 # Align OIII lights
 register OIII_bkg_pp_light -drizzle
@@ -187,27 +210,19 @@ save OIII_result
 
 END_OF_SCRIPT_DUALBAND_OIII
 elif [[ "$INPUTTYPE" == "osc" ]]; then
-siril -s - <<END_OF_SCRIPT_BG_OSC
-requires 0.99.10
-cd process
-
-seqsubsky pp_light 1
-
-close
-
-END_OF_SCRIPT_BG_OSC
-rm -rf process/pp* #save some space
+#rm -rf process/pp* #save some space
 
 siril -s - <<END_OF_SCRIPT_OSC
-requires 0.99.10
+requires 1.2.0
+cd "$PWD"
 cd process
 
 # Align lights
-register bkg_pp_light ${DRIZZLE}
+register pp_light ${DRIZZLE}
 
 # Stack calibrated lights to result.fit
-stack r_bkg_pp_light rej 3 3 -norm=addscale -output_norm -filter-wfwhm=90% -weighted -out=../result_all
-stack r_bkg_pp_light rej 3 3 -norm=addscale -output_norm -filter-fwhm=4 -weighted -out=../result_sharp
+stack r_pp_light rej 3 3 -norm=addscale -output_norm -filter-wfwhm=90% -weight_from_wfwhm -out=../result_all
+stack r_pp_light rej 3 3 -norm=addscale -output_norm -filter-fwhm=4 -weight_from_wfwhm -out=../result_sharp
 
 cd ..
 close
