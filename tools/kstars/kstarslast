@@ -1,2 +1,2 @@
 #!/bin/bash
-kstars $(ls -t1 *.fits | head -n 1)
+kstars "$(ls -t1 *.fits | head -n 1)"
