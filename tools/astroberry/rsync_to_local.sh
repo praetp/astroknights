@@ -6,7 +6,7 @@ DEST=${DEST:-/camera}
 while true
 do
 	set +e
-	rsync -av --remove-source-files astroberry:/camera $DEST
+	rsync -av astroberry:/camera $DEST
 	rsync -av --copy-links --remove-source-files astroberry:logs/autofocus $DEST/camera/logs
 
 	rsync -av --copy-links astroberry:logs/analyze $DEST/camera/logs
