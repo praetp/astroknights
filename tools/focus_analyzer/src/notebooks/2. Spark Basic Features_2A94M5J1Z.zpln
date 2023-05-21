@@ -1,18 +1,18 @@
-﻿{
+{
   "paragraphs": [
     {
       "text": "%md\n## Welcome to Zeppelin.\n##### This is a live tutorial, you can run the code yourself. (Shift-Enter to Run)",
       "user": "anonymous",
-      "dateUpdated": "2021-07-26T04:36:10+0000",
+      "dateUpdated": "2021-07-26 04:36:10.000",
       "progress": 0,
       "config": {
-        "colWidth": 12,
+        "colWidth": 12.0,
         "editorHide": true,
         "results": [
           {
             "graph": {
               "mode": "table",
-              "height": 300,
+              "height": 300.0,
               "optionOpen": false,
               "keys": [],
               "values": [],
@@ -28,7 +28,7 @@
         },
         "editorMode": "ace/mode/markdown",
         "tableHide": false,
-        "fontSize": 9
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -39,7 +39,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h2>Welcome to Zeppelin.</h2>\n<h5>This is a live tutorial, you can run the code yourself. (Shift-Enter to Run)</h5>\n\n</div>"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eWelcome to Zeppelin.\u003c/h2\u003e\n\u003ch5\u003eThis is a live tutorial, you can run the code yourself. (Shift-Enter to Run)\u003c/h5\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -48,21 +48,19 @@
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1423836981412_-1007008116",
       "id": "20150213-231621_168813393",
-      "dateCreated": "2015-02-13T23:16:21+0000",
-      "dateStarted": "2021-07-26T04:36:10+0000",
-      "dateFinished": "2021-07-26T04:36:10+0000",
-      "status": "FINISHED",
-      "focus": true,
-      "$$hashKey": "object:11304"
+      "dateCreated": "2015-02-13 23:16:21.000",
+      "dateStarted": "2021-07-26 04:36:10.000",
+      "dateFinished": "2021-07-26 04:36:10.000",
+      "status": "FINISHED"
     },
     {
       "title": "Load data into table",
-      "text": "import org.apache.commons.io.IOUtils\nimport java.net.URL\nimport java.nio.charset.Charset\n\n// Zeppelin creates and injects sc (SparkContext) and sqlContext (HiveContext or SqlContext)\n// So you don't need create them manually\n\n// load bank data\nval bankText = sc.parallelize(\n    IOUtils.toString(\n        new URL(\"https://s3.amazonaws.com/apache-zeppelin/tutorial/bank/bank.csv\"),\n        Charset.forName(\"utf8\")).split(\"\\n\"))\n\ncase class Bank(age: Integer, job: String, marital: String, education: String, balance: Integer)\n\nval bank = bankText.map(s => s.split(\";\")).filter(s => s(0) != \"\\\"age\\\"\").map(\n    s => Bank(s(0).toInt, \n            s(1).replaceAll(\"\\\"\", \"\"),\n            s(2).replaceAll(\"\\\"\", \"\"),\n            s(3).replaceAll(\"\\\"\", \"\"),\n            s(5).replaceAll(\"\\\"\", \"\").toInt\n        )\n).toDF()\nbank.registerTempTable(\"bank\")",
+      "text": "import org.apache.commons.io.IOUtils\nimport java.net.URL\nimport java.nio.charset.Charset\n\n// Zeppelin creates and injects sc (SparkContext) and sqlContext (HiveContext or SqlContext)\n// So you don\u0027t need create them manually\n\n// load bank data\nval bankText \u003d sc.parallelize(\n    IOUtils.toString(\n        new URL(\"https://s3.amazonaws.com/apache-zeppelin/tutorial/bank/bank.csv\"),\n        Charset.forName(\"utf8\")).split(\"\\n\"))\n\ncase class Bank(age: Integer, job: String, marital: String, education: String, balance: Integer)\n\nval bank \u003d bankText.map(s \u003d\u003e s.split(\";\")).filter(s \u003d\u003e s(0) !\u003d \"\\\"age\\\"\").map(\n    s \u003d\u003e Bank(s(0).toInt, \n            s(1).replaceAll(\"\\\"\", \"\"),\n            s(2).replaceAll(\"\\\"\", \"\"),\n            s(3).replaceAll(\"\\\"\", \"\"),\n            s(5).replaceAll(\"\\\"\", \"\").toInt\n        )\n).toDF()\nbank.registerTempTable(\"bank\")\n\nbank",
       "user": "anonymous",
-      "dateUpdated": "2021-07-26T04:36:10+0000",
+      "dateUpdated": "2023-05-11 15:32:22.357",
       "progress": 0,
       "config": {
-        "colWidth": 12,
+        "colWidth": 12.0,
         "title": true,
         "enabled": true,
         "editorMode": "ace/mode/scala",
@@ -70,7 +68,7 @@
           {
             "graph": {
               "mode": "table",
-              "height": 300,
+              "height": 300.0,
               "optionOpen": false
             }
           }
@@ -81,7 +79,7 @@
           "completionKey": "TAB",
           "completionSupport": true
         },
-        "fontSize": 9
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -92,7 +90,7 @@
         "msg": [
           {
             "type": "TEXT",
-            "data": "\u001b[33mwarning: \u001b[0mthere was one deprecation warning (since 2.0.0); for details, enable `:setting -deprecation' or `:replay -deprecation'\nimport sqlContext.implicits._\nimport org.apache.commons.io.IOUtils\nimport java.net.URL\nimport java.nio.charset.Charset\n\u001b[1m\u001b[34mbankText\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m = ParallelCollectionRDD[505] at parallelize at <console>:32\ndefined class Bank\n\u001b[1m\u001b[34mbank\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m = [age: int, job: string ... 3 more fields]\n"
+            "data": "\u001b[33mwarning: \u001b[0mthere was one deprecation warning (since 2.0.0); for details, enable `:setting -deprecation\u0027 or `:replay -deprecation\u0027\nimport sqlContext.implicits._\nimport org.apache.commons.io.IOUtils\nimport java.net.URL\nimport java.nio.charset.Charset\n\u001b[1m\u001b[34mbankText\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.rdd.RDD[String]\u001b[0m \u003d ParallelCollectionRDD[505] at parallelize at \u003cconsole\u003e:32\ndefined class Bank\n\u001b[1m\u001b[34mbank\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [age: int, job: string ... 3 more fields]\n"
           }
         ]
       },
@@ -101,24 +99,23 @@
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1423500779206_-1502780787",
       "id": "20150210-015259_1403135953",
-      "dateCreated": "2015-02-10T01:52:59+0000",
-      "dateStarted": "2021-07-26T04:36:10+0000",
-      "dateFinished": "2021-07-26T04:36:13+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:11305"
+      "dateCreated": "2015-02-10 01:52:59.000",
+      "dateStarted": "2021-07-26 04:36:10.000",
+      "dateFinished": "2021-07-26 04:36:13.000",
+      "status": "FINISHED"
     },
     {
-      "text": "%sql \nselect age, count(1) value\nfrom bank \nwhere age < 30 \ngroup by age \norder by age",
+      "text": "%sql \nselect age, count(1) value\nfrom bank \nwhere age \u003c 30 \ngroup by age \norder by age",
       "user": "anonymous",
-      "dateUpdated": "2021-07-26T04:36:13+0000",
+      "dateUpdated": "2021-07-26 04:36:13.000",
       "progress": 15,
       "config": {
-        "colWidth": 4,
+        "colWidth": 4.0,
         "results": [
           {
             "graph": {
               "mode": "multiBarChart",
-              "height": 366,
+              "height": 366.0,
               "optionOpen": false,
               "setting": {
                 "multiBarChart": {
@@ -132,7 +129,7 @@
               "keys": [
                 {
                   "name": "age",
-                  "index": 0,
+                  "index": 0.0,
                   "aggr": "sum"
                 }
               ],
@@ -140,7 +137,7 @@
               "values": [
                 {
                   "name": "value",
-                  "index": 1,
+                  "index": 1.0,
                   "aggr": "sum"
                 }
               ]
@@ -156,7 +153,7 @@
           "completionSupport": true
         },
         "editorMode": "ace/mode/sql",
-        "fontSize": 9
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -180,7 +177,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://3745c7ed824d:4040/jobs/job?id=210",
+              "jobUrl": "http://3745c7ed824d:4040/jobs/job?id\u003d210",
               "$$hashKey": "object:11722"
             }
           ],
@@ -190,24 +187,23 @@
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1423500782552_-1439281894",
       "id": "20150210-015302_1492795503",
-      "dateCreated": "2015-02-10T01:53:02+0000",
-      "dateStarted": "2021-07-26T04:36:13+0000",
-      "dateFinished": "2021-07-26T04:36:14+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:11306"
+      "dateCreated": "2015-02-10 01:53:02.000",
+      "dateStarted": "2021-07-26 04:36:13.000",
+      "dateFinished": "2021-07-26 04:36:14.000",
+      "status": "FINISHED"
     },
     {
-      "text": "%sql \nselect age, count(1) value \nfrom bank \nwhere age < ${maxAge=30} \ngroup by age \norder by age",
+      "text": "%sql \nselect age, count(1) value \nfrom bank \nwhere age \u003c ${maxAge\u003d30} \ngroup by age \norder by age",
       "user": "anonymous",
-      "dateUpdated": "2021-07-26T04:36:14+0000",
+      "dateUpdated": "2021-07-26 04:36:14.000",
       "progress": 58,
       "config": {
-        "colWidth": 4,
+        "colWidth": 4.0,
         "results": [
           {
             "graph": {
               "mode": "multiBarChart",
-              "height": 294,
+              "height": 294.0,
               "optionOpen": false,
               "setting": {
                 "multiBarChart": {
@@ -221,7 +217,7 @@
               "keys": [
                 {
                   "name": "age",
-                  "index": 0,
+                  "index": 0.0,
                   "aggr": "sum"
                 }
               ],
@@ -229,7 +225,7 @@
               "values": [
                 {
                   "name": "value",
-                  "index": 1,
+                  "index": 1.0,
                   "aggr": "sum"
                 }
               ]
@@ -245,7 +241,7 @@
           "completionSupport": true
         },
         "editorMode": "ace/mode/sql",
-        "fontSize": 9
+        "fontSize": 9.0
       },
       "settings": {
         "params": {
@@ -257,8 +253,7 @@
             "name": "maxAge",
             "displayName": "maxAge",
             "defaultValue": "30",
-            "hidden": false,
-            "$$hashKey": "object:11434"
+            "hidden": false
           }
         }
       },
@@ -280,7 +275,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://3745c7ed824d:4040/jobs/job?id=211",
+              "jobUrl": "http://3745c7ed824d:4040/jobs/job?id\u003d211",
               "$$hashKey": "object:11820"
             }
           ],
@@ -290,24 +285,23 @@
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1423720444030_-1424110477",
       "id": "20150212-145404_867439529",
-      "dateCreated": "2015-02-12T14:54:04+0000",
-      "dateStarted": "2021-07-26T04:36:14+0000",
-      "dateFinished": "2021-07-26T04:36:15+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:11307"
+      "dateCreated": "2015-02-12 14:54:04.000",
+      "dateStarted": "2021-07-26 04:36:14.000",
+      "dateFinished": "2021-07-26 04:36:15.000",
+      "status": "FINISHED"
     },
     {
-      "text": "%sql \nselect age, count(1) value \nfrom bank \nwhere marital=\"${marital=single,single|divorced|married}\" \ngroup by age \norder by age",
+      "text": "%sql \nselect age, count(1) value \nfrom bank \nwhere marital\u003d\"${marital\u003dsingle,single|divorced|married}\" \ngroup by age \norder by age",
       "user": "anonymous",
-      "dateUpdated": "2021-07-26T04:36:15+0000",
+      "dateUpdated": "2021-07-26 04:36:15.000",
       "progress": 51,
       "config": {
-        "colWidth": 4,
+        "colWidth": 4.0,
         "results": [
           {
             "graph": {
               "mode": "stackedAreaChart",
-              "height": 280,
+              "height": 280.0,
               "optionOpen": false,
               "setting": {
                 "stackedAreaChart": {
@@ -321,7 +315,7 @@
               "keys": [
                 {
                   "name": "age",
-                  "index": 0,
+                  "index": 0.0,
                   "aggr": "sum"
                 }
               ],
@@ -329,7 +323,7 @@
               "values": [
                 {
                   "name": "value",
-                  "index": 1,
+                  "index": 1.0,
                   "aggr": "sum"
                 }
               ]
@@ -345,7 +339,7 @@
           "completionSupport": true
         },
         "editorMode": "ace/mode/sql",
-        "fontSize": 9,
+        "fontSize": 9.0,
         "runOnSelectionChange": true
       },
       "settings": {
@@ -357,23 +351,19 @@
             "type": "Select",
             "options": [
               {
-                "value": "single",
-                "$$hashKey": "object:11472"
+                "value": "single"
               },
               {
-                "value": "divorced",
-                "$$hashKey": "object:11473"
+                "value": "divorced"
               },
               {
-                "value": "married",
-                "$$hashKey": "object:11474"
+                "value": "married"
               }
             ],
             "name": "marital",
             "displayName": "marital",
             "defaultValue": "single",
-            "hidden": false,
-            "$$hashKey": "object:11458"
+            "hidden": false
           }
         }
       },
@@ -395,7 +385,7 @@
           "group": "spark",
           "values": [
             {
-              "jobUrl": "http://3745c7ed824d:4040/jobs/job?id=212",
+              "jobUrl": "http://3745c7ed824d:4040/jobs/job?id\u003d212",
               "$$hashKey": "object:11918"
             }
           ],
@@ -405,25 +395,24 @@
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1423836262027_-210588283",
       "id": "20150213-230422_1600658137",
-      "dateCreated": "2015-02-13T23:04:22+0000",
-      "dateStarted": "2021-07-26T04:36:15+0000",
-      "dateFinished": "2021-07-26T04:36:16+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:11308"
+      "dateCreated": "2015-02-13 23:04:22.000",
+      "dateStarted": "2021-07-26 04:36:15.000",
+      "dateFinished": "2021-07-26 04:36:16.000",
+      "status": "FINISHED"
     },
     {
-      "text": "%md\n## Congratulations, it's done.\n##### You can create your own notebook in 'Notebook' menu. Good luck!",
+      "text": "%md\n## Congratulations, it\u0027s done.\n##### You can create your own notebook in \u0027Notebook\u0027 menu. Good luck!",
       "user": "anonymous",
-      "dateUpdated": "2021-07-26T04:36:16+0000",
+      "dateUpdated": "2021-07-26 04:36:16.000",
       "progress": 0,
       "config": {
-        "colWidth": 12,
+        "colWidth": 12.0,
         "editorHide": true,
         "results": [
           {
             "graph": {
               "mode": "table",
-              "height": 300,
+              "height": 300.0,
               "optionOpen": false
             }
           }
@@ -435,7 +424,7 @@
         },
         "editorMode": "ace/mode/markdown",
         "tableHide": false,
-        "fontSize": 9
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -446,7 +435,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<h2>Congratulations, it&rsquo;s done.</h2>\n<h5>You can create your own notebook in &lsquo;Notebook&rsquo; menu. Good luck!</h5>\n\n</div>"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003ch2\u003eCongratulations, it\u0026rsquo;s done.\u003c/h2\u003e\n\u003ch5\u003eYou can create your own notebook in \u0026lsquo;Notebook\u0026rsquo; menu. Good luck!\u003c/h5\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -455,25 +444,24 @@
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1423836268492_216498320",
       "id": "20150213-230428_1231780373",
-      "dateCreated": "2015-02-13T23:04:28+0000",
-      "dateStarted": "2021-07-26T04:36:16+0000",
-      "dateFinished": "2021-07-26T04:36:16+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:11309"
+      "dateCreated": "2015-02-13 23:04:28.000",
+      "dateStarted": "2021-07-26 04:36:16.000",
+      "dateFinished": "2021-07-26 04:36:16.000",
+      "status": "FINISHED"
     },
     {
-      "text": "%md\n\nAbout bank data\n\n```\nCitation Request:\n  This dataset is public available for research. The details are described in [Moro et al., 2011]. \n  Please include this citation if you plan to use this database:\n\n  [Moro et al., 2011] S. Moro, R. Laureano and P. Cortez. Using Data Mining for Bank Direct Marketing: An Application of the CRISP-DM Methodology. \n  In P. Novais et al. (Eds.), Proceedings of the European Simulation and Modelling Conference - ESM'2011, pp. 117-121, Guimarães, Portugal, October, 2011. EUROSIS.\n\n  Available at: [pdf] http://hdl.handle.net/1822/14838\n                [bib] http://www3.dsi.uminho.pt/pcortez/bib/2011-esm-1.txt\n```",
+      "text": "%md\n\nAbout bank data\n\n```\nCitation Request:\n  This dataset is public available for research. The details are described in [Moro et al., 2011]. \n  Please include this citation if you plan to use this database:\n\n  [Moro et al., 2011] S. Moro, R. Laureano and P. Cortez. Using Data Mining for Bank Direct Marketing: An Application of the CRISP-DM Methodology. \n  In P. Novais et al. (Eds.), Proceedings of the European Simulation and Modelling Conference - ESM\u00272011, pp. 117-121, Guimarães, Portugal, October, 2011. EUROSIS.\n\n  Available at: [pdf] http://hdl.handle.net/1822/14838\n                [bib] http://www3.dsi.uminho.pt/pcortez/bib/2011-esm-1.txt\n```",
       "user": "anonymous",
-      "dateUpdated": "2021-07-26T04:36:16+0000",
+      "dateUpdated": "2021-07-26 04:36:16.000",
       "progress": 0,
       "config": {
-        "colWidth": 12,
+        "colWidth": 12.0,
         "editorHide": true,
         "results": [
           {
             "graph": {
               "mode": "table",
-              "height": 300,
+              "height": 300.0,
               "optionOpen": false
             }
           }
@@ -485,7 +473,7 @@
         },
         "editorMode": "ace/mode/markdown",
         "tableHide": false,
-        "fontSize": 9
+        "fontSize": 9.0
       },
       "settings": {
         "params": {},
@@ -496,7 +484,7 @@
         "msg": [
           {
             "type": "HTML",
-            "data": "<div class=\"markdown-body\">\n<p>About bank data</p>\n<pre><code>Citation Request:\n  This dataset is public available for research. The details are described in [Moro et al., 2011]. \n  Please include this citation if you plan to use this database:\n\n  [Moro et al., 2011] S. Moro, R. Laureano and P. Cortez. Using Data Mining for Bank Direct Marketing: An Application of the CRISP-DM Methodology. \n  In P. Novais et al. (Eds.), Proceedings of the European Simulation and Modelling Conference - ESM'2011, pp. 117-121, Guimarães, Portugal, October, 2011. EUROSIS.\n\n  Available at: [pdf] http://hdl.handle.net/1822/14838\n                [bib] http://www3.dsi.uminho.pt/pcortez/bib/2011-esm-1.txt\n</code></pre>\n\n</div>"
+            "data": "\u003cdiv class\u003d\"markdown-body\"\u003e\n\u003cp\u003eAbout bank data\u003c/p\u003e\n\u003cpre\u003e\u003ccode\u003eCitation Request:\n  This dataset is public available for research. The details are described in [Moro et al., 2011]. \n  Please include this citation if you plan to use this database:\n\n  [Moro et al., 2011] S. Moro, R. Laureano and P. Cortez. Using Data Mining for Bank Direct Marketing: An Application of the CRISP-DM Methodology. \n  In P. Novais et al. (Eds.), Proceedings of the European Simulation and Modelling Conference - ESM\u00272011, pp. 117-121, Guimarães, Portugal, October, 2011. EUROSIS.\n\n  Available at: [pdf] http://hdl.handle.net/1822/14838\n                [bib] http://www3.dsi.uminho.pt/pcortez/bib/2011-esm-1.txt\n\u003c/code\u003e\u003c/pre\u003e\n\n\u003c/div\u003e"
           }
         ]
       },
@@ -505,20 +493,19 @@
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1427420818407_872443482",
       "id": "20150326-214658_12335843",
-      "dateCreated": "2015-03-26T21:46:58+0000",
-      "dateStarted": "2021-07-26T04:36:16+0000",
-      "dateFinished": "2021-07-26T04:36:16+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:11310"
+      "dateCreated": "2015-03-26 21:46:58.000",
+      "dateStarted": "2021-07-26 04:36:16.000",
+      "dateFinished": "2021-07-26 04:36:16.000",
+      "status": "FINISHED"
     },
     {
       "text": "",
       "user": "anonymous",
-      "dateUpdated": "2023-05-11T10:47:39+0000",
+      "dateUpdated": "2023-05-11 10:47:39.000",
       "progress": 0,
       "config": {
-        "colWidth": 12,
-        "fontSize": 9,
+        "colWidth": 12.0,
+        "fontSize": 9.0,
         "enabled": true,
         "results": {},
         "editorSetting": {
@@ -538,9 +525,8 @@
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1435955447812_-158639899",
       "id": "20150703-133047_853701097",
-      "dateCreated": "2015-07-03T13:30:47+0000",
-      "status": "FINISHED",
-      "$$hashKey": "object:11311"
+      "dateCreated": "2015-07-03 13:30:47.000",
+      "status": "FINISHED"
     }
   ],
   "name": "2. Spark Basic Features",
@@ -554,6 +540,5 @@
     "isZeppelinNotebookCronEnable": false,
     "personalizedMode": "false"
   },
-  "info": {},
-  "path": "/Spark Tutorial/2. Spark Basic Features"
+  "info": {}
 }

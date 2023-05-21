@@ -1,51 +1,9 @@
 {
   "paragraphs": [
     {
-      "text": " import spark.implicits._\n\n  val simpleData \u003d Seq((\"James\", \"Sales\", 3000),\n    (\"Michael\", \"Sales\", 4600),\n    (\"Robert\", \"Sales\", 4100),\n    (\"Maria\", \"Finance\", 3000),\n    (\"James\", \"Sales\", 3000),\n    (\"Scott\", \"Finance\", 3300),\n    (\"Jen\", \"Finance\", 3900),\n    (\"Jeff\", \"Marketing\", 3000),\n    (\"Kumar\", \"Marketing\", 2000),\n    (\"Saif\", \"Sales\", 4100)\n  )\n  val df \u003d simpleData.toDF(\"employee_name\", \"department\", \"salary\")\n  df.show()",
+      "text": "val prefix \u003d \"file:///datasets/ts115/\"\nval datasets \u003d Seq(\"m12_20230503\", \"m13_20230502\", \"m63_20230503\")\nval focus_files \u003d datasets.map(dataset \u003d\u003e prefix + dataset + \"/focus.csv\")\nprint(focus_files)\nval fwhm_files \u003d datasets.map(dataset \u003d\u003e prefix + dataset + \"/fwhm.csv\")\nval roundness_files \u003d datasets.map(dataset \u003d\u003e prefix + dataset + \"/roundness.csv\")\nval stars_files \u003d datasets.map(dataset \u003d\u003e prefix + dataset + \"/stars.csv\")\n\n\n",
       "user": "anonymous",
-      "dateUpdated": "2023-05-11 14:15:23.040",
-      "progress": 0,
-      "config": {
-        "editorSetting": {
-          "language": "scala",
-          "editOnDblClick": false,
-          "completionKey": "TAB",
-          "completionSupport": true
-        },
-        "colWidth": 12.0,
-        "editorMode": "ace/mode/scala",
-        "fontSize": 9.0,
-        "results": {},
-        "enabled": true,
-        "tableHide": true
-      },
-      "settings": {
-        "params": {},
-        "forms": {}
-      },
-      "results": {
-        "code": "SUCCESS",
-        "msg": [
-          {
-            "type": "TEXT",
-            "data": "+-------------+----------+------+\n|employee_name|department|salary|\n+-------------+----------+------+\n|        James|     Sales|  3000|\n|      Michael|     Sales|  4600|\n|       Robert|     Sales|  4100|\n|        Maria|   Finance|  3000|\n|        James|     Sales|  3000|\n|        Scott|   Finance|  3300|\n|          Jen|   Finance|  3900|\n|         Jeff| Marketing|  3000|\n|        Kumar| Marketing|  2000|\n|         Saif|     Sales|  4100|\n+-------------+----------+------+\n\nimport spark.implicits._\n\u001b[1m\u001b[34msimpleData\u001b[0m: \u001b[1m\u001b[32mSeq[(String, String, Int)]\u001b[0m \u003d List((James,Sales,3000), (Michael,Sales,4600), (Robert,Sales,4100), (Maria,Finance,3000), (James,Sales,3000), (Scott,Finance,3300), (Jen,Finance,3900), (Jeff,Marketing,3000), (Kumar,Marketing,2000), (Saif,Sales,4100))\n\u001b[1m\u001b[34mdf\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [employee_name: string, department: string ... 1 more field]\n"
-          }
-        ]
-      },
-      "apps": [],
-      "runtimeInfos": {},
-      "progressUpdateIntervalMs": 500,
-      "jobName": "paragraph_1683797518074_1954325981",
-      "id": "paragraph_1683797518074_1954325981",
-      "dateCreated": "2023-05-11 09:31:58.074",
-      "dateStarted": "2023-05-11 14:14:09.195",
-      "dateFinished": "2023-05-11 14:14:15.433",
-      "status": "FINISHED"
-    },
-    {
-      "text": "val focus \u003d spark.csv.read(\"/datasets/\")",
-      "user": "anonymous",
-      "dateUpdated": "2023-05-11 14:17:36.060",
+      "dateUpdated": "2023-05-12 18:58:46.751",
       "progress": 0,
       "config": {
         "editorSetting": {
@@ -64,12 +22,313 @@
         "params": {},
         "forms": {}
       },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "List(file:///datasets/ts115/m12_20230503/focus.csv, file:///datasets/ts115/m13_20230502/focus.csv, file:///datasets/ts115/m63_20230503/focus.csv)\u001b[1m\u001b[34mprefix\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d file:///datasets/ts115/\n\u001b[1m\u001b[34mdatasets\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(m12_20230503, m13_20230502, m63_20230503)\n\u001b[1m\u001b[34mfocus_files\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(file:///datasets/ts115/m12_20230503/focus.csv, file:///datasets/ts115/m13_20230502/focus.csv, file:///datasets/ts115/m63_20230503/focus.csv)\n\u001b[1m\u001b[34mfwhm_files\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(file:///datasets/ts115/m12_20230503/fwhm.csv, file:///datasets/ts115/m13_20230502/fwhm.csv, file:///datasets/ts115/m63_20230503/fwhm.csv)\n\u001b[1m\u001b[34mroundness_files\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(file:///datasets/ts115/m12_20230503/roundness.csv, file:///datasets/ts115/m13_20230502/roundness.csv, file:///datasets/ts115/m63_20230503/roundness.csv)\n\u001b[1m\u001b[34mstars_files\u001b[0m...\n"
+          }
+        ]
+      },
       "apps": [],
       "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1683819359476_1261316681",
+      "id": "paragraph_1683819359476_1261316681",
+      "dateCreated": "2023-05-11 15:35:59.476",
+      "dateStarted": "2023-05-12 18:58:46.754",
+      "dateFinished": "2023-05-12 18:58:46.962",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.sql.expressions.Window  \nval dataset_regex \u003d \"^.+/(.+)/\\\\w+\\\\.csv$\"\n\nval focus \u003d spark.read.option(\"header\", true).option(\"inferSchema\", true).csv(focus_files: _*).withColumn(\"dataset\", regexp_extract(input_file_name(), dataset_regex, 1))\n// focus.show(20, false)\n// focus.printSchema\n\n\nval fwhm_colum_names \u003d Seq(\"index\",\"fwhm\", \"dataset\")\nval fwhmtmp \u003d spark.read.option(\"inferSchema\", true).csv(fwhm_files: _*).withColumn(\"dataset\", regexp_extract(input_file_name(), dataset_regex, 1))\nval fwhm \u003d fwhmtmp.toDF(fwhm_colum_names:_*)\n// fwhm.show\n\nval roundness_colum_names \u003d Seq(\"index\",\"roundness\", \"dataset\")\nval roundnesstmp \u003d spark.read.option(\"inferSchema\", true).csv(roundness_files: _*).withColumn(\"dataset\", regexp_extract(input_file_name(), dataset_regex, 1))\nval roundness \u003d roundnesstmp.toDF(roundness_colum_names:_*)\n// roundness.show\n\nval datasetWindow  \u003d Window.partitionBy(\"dataset\")\nval stars_colum_names \u003d Seq(\"index\",\"stars\", \"dataset\")\nval starstmp \u003d spark.read.option(\"inferSchema\", true).csv(stars_files: _*).withColumn(\"dataset\", regexp_extract(input_file_name(), dataset_regex, 1))\nval stars \u003d starstmp.toDF(stars_colum_names:_*).withColumn(\"maxstars\",  max(col(\"stars\")).over(datasetWindow))\n// stars.show\n\nval alldata \u003d focus.join(fwhm, Seq(\"index\", \"dataset\")).join(roundness, Seq(\"index\", \"dataset\")).join(stars, Seq(\"index\", \"dataset\"))\n// \njoined.show",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-13 05:22:38.502",
+      "progress": 25,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "+-----------------------------------------------------------------------------------------+-----+-----------+--------+------------+\n|filename                                                                                 |index|temperature|position|dataset     |\n+-----------------------------------------------------------------------------------------+-----+-----------+--------+------------+\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-40-52_0003.fits|1    |9.49       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-42-06_0004.fits|2    |9.49       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-43-15_0005.fits|3    |9.49       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-44-20_0006.fits|4    |9.49       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-45-32_0007.fits|5    |9.49       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-46-37_0008.fits|6    |9.49       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-47-42_0009.fits|7    |9.38       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-48-54_0010.fits|8    |9.38       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-49-59_0011.fits|9    |9.38       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-51-04_0012.fits|10   |9.28       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-52-17_0013.fits|11   |9.28       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-53-21_0014.fits|12   |9.28       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-54-33_0015.fits|13   |9.17       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-55-47_0016.fits|14   |9.17       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-58-08_0018.fits|15   |9.17       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T22-59-47_0019.fits|16   |9.17       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T23-00-54_0020.fits|17   |9.17       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T23-02-00_0021.fits|18   |9.17       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T23-03-14_0022.fits|19   |9.17       |25344   |m13_20230502|\n|/camera/camera/M_13/lights/M_13_Light_Optolong_UVIR_60_secs_2023-05-02T23-04-19_0023.fits|20   |9.07       |25344   |m13_20230502|\n+-----------------------------------------------------------------------------------------+-----+-----------+--------+------------+\nonly showing top 20 rows\n\nroot\n |-- filename: string (nullable \u003d true)\n |-- index: integer (nullable \u003d true)\n |-- temperature: double (nullable \u003d true)\n |-- position: integer (nullable \u003d true)\n |-- dataset: string (nullable \u003d false)\n\n+-----+-----+------------+--------+\n|index|stars|     dataset|maxstars|\n+-----+-----+------------+--------+\n|  1.0|222.0|m12_20230503|   393.0|\n|  2.0|245.0|m12_20230503|   393.0|\n|  3.0|248.0|m12_20230503|   393.0|\n|  4.0|249.0|m12_20230503|   393.0|\n|  5.0|242.0|m12_20230503|   393.0|\n|  6.0|253.0|m12_20230503|   393.0|\n|  7.0|245.0|m12_20230503|   393.0|\n|  8.0|270.0|m12_20230503|   393.0|\n|  9.0|259.0|m12_20230503|   393.0|\n| 10.0|267.0|m12_20230503|   393.0|\n| 11.0|275.0|m12_20230503|   393.0|\n| 12.0|276.0|m12_20230503|   393.0|\n| 13.0|274.0|m12_20230503|   393.0|\n| 14.0|277.0|m12_20230503|   393.0|\n| 15.0|280.0|m12_20230503|   393.0|\n| 16.0|277.0|m12_20230503|   393.0|\n| 17.0|285.0|m12_20230503|   393.0|\n| 18.0|287.0|m12_20230503|   393.0|\n| 19.0|295.0|m12_20230503|   393.0|\n| 20.0|289.0|m12_20230503|   393.0|\n+-----+-----+------------+--------+\nonly showing top 20 rows\n\n+-----+------------+--------------------+-----------+--------+-------+---------+-----+\n|index|     dataset|            filename|temperature|position|   fwhm|roundness|stars|\n+-----+------------+--------------------+-----------+--------+-------+---------+-----+\n|    1|m13_20230502|/camera/camera/M_...|       9.49|   25344|5.05219| 0.846802|245.0|\n|    2|m13_20230502|/camera/camera/M_...|       9.49|   25344|4.96247| 0.869312|244.0|\n|    3|m13_20230502|/camera/camera/M_...|       9.49|   25344|5.05535| 0.886522|247.0|\n|    4|m13_20230502|/camera/camera/M_...|       9.49|   25344|5.16278| 0.845888|241.0|\n|    5|m13_20230502|/camera/camera/M_...|       9.49|   25344|4.97759| 0.877639|255.0|\n|    6|m13_20230502|/camera/camera/M_...|       9.49|   25344|5.22463| 0.876708|236.0|\n|    7|m13_20230502|/camera/camera/M_...|       9.38|   25344|5.22254| 0.866145|250.0|\n|    8|m13_20230502|/camera/camera/M_...|       9.38|   25344|5.15879| 0.863436|244.0|\n|    9|m13_20230502|/camera/camera/M_...|       9.38|   25344| 5.6631| 0.817398|238.0|\n|   10|m13_20230502|/camera/camera/M_...|       9.28|   25344|5.65279| 0.858222|223.0|\n|   11|m13_20230502|/camera/camera/M_...|       9.28|   25344|5.43842| 0.842206|236.0|\n|   12|m13_20230502|/camera/camera/M_...|       9.28|   25344|5.37362| 0.846671|220.0|\n|   13|m13_20230502|/camera/camera/M_...|       9.17|   25344|5.33255| 0.874603|247.0|\n|   14|m13_20230502|/camera/camera/M_...|       9.17|   25344|5.44303| 0.868745|250.0|\n|   15|m13_20230502|/camera/camera/M_...|       9.17|   25344|5.60838| 0.869055|239.0|\n|   16|m13_20230502|/camera/camera/M_...|       9.17|   25344|5.55075| 0.860079|229.0|\n|   17|m13_20230502|/camera/camera/M_...|       9.17|   25344|6.03256| 0.824542|217.0|\n|   18|m13_20230502|/camera/camera/M_...|       9.17|   25344|5.95308| 0.869661|228.0|\n|   19|m13_20230502|/camera/camera/M_...|       9.17|   25344|5.73674| 0.837093|238.0|\n|   20|m13_20230502|/camera/camera/M_...|       9.07|   25344|5.57978| 0.858767|252.0|\n+-----+------------+--------------------+-----------+--------+-------+---------+-----+\nonly showing top 20 rows\n\nimport org.apache.spark.sql.expressions.Window\n\u001b[1m\u001b[34mdataset_regex\u001b[0m: \u001b[1m\u001b[32mString\u001b[0m \u003d ^.+/(.+)/\\w+\\.csv$\n\u001b[1m\u001b[34mfocus\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [filename: string, index: int ... 3 more fields]\n\u001b[1m\u001b[34mfwhm_colum_names\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(index, fwhm, dataset)\n\u001b[1m\u001b[34mfwhmtmp\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [_c0: double, _c1: double ... 1 more field]\n\u001b[1m\u001b[34mfwhm\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [index: double, fwhm: double ... 1 more field]\n\u001b[1m\u001b[34mroundness_colum_names\u001b[0m: \u001b[1m\u001b[32mSeq[String]\u001b[0m \u003d List(index, roundness, dataset)\n\u001b[1m\u001b[34mroundnesstmp\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [_c0: double, _c1: double ... 1 more field]\n\u001b[1m\u001b[34mroundness\u001b[0m: \u001b[1m\u001b[32morg.apache.s...\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d361"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d362"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d363"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d364"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d365"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d366"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d367"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d368"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d369"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d370"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d371"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d375"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
       "progressUpdateIntervalMs": 500,
       "jobName": "paragraph_1683814602760_1435136913",
       "id": "paragraph_1683814602760_1435136913",
       "dateCreated": "2023-05-11 14:16:42.760",
+      "dateStarted": "2023-05-13 05:22:08.714",
+      "dateFinished": "2023-05-13 05:22:10.873",
+      "status": "FINISHED"
+    },
+    {
+      "text": "val sanitized \u003d alldata.filter(\"fwhm \u003c 3.3\").filter(\"roundness \u003e 0.85\").filter(\"stars \u003e 0.8 * maxstars\").select(\"temperature\", \"position\").cache\nval extra \u003d spark.read.option(\"header\", true).option(\"inferSchema\", true).csv(prefix + \"/extra/temperature_position.csv\")\n\nval ready \u003d sanitized.union(extra)\nready.count\n\n\n// sanitized.show(100, false)\nz.show(ready)\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-13 05:41:33.241",
+      "progress": 0,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "scatterChart",
+              "height": 300.0,
+              "optionOpen": false,
+              "setting": {
+                "table": {
+                  "tableGridState": {},
+                  "tableColumnTypeState": {
+                    "names": {
+                      "dataset": "string",
+                      "temperature": "string",
+                      "position": "string"
+                    },
+                    "updated": false
+                  },
+                  "tableOptionSpecHash": "[{\"name\":\"useFilter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable filter for columns\"},{\"name\":\"showPagination\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable pagination for better navigation\"},{\"name\":\"showAggregationFooter\",\"valueType\":\"boolean\",\"defaultValue\":false,\"widget\":\"checkbox\",\"description\":\"Enable a footer for displaying aggregated values\"}]",
+                  "tableOptionValue": {
+                    "useFilter": false,
+                    "showPagination": false,
+                    "showAggregationFooter": false
+                  },
+                  "updated": false,
+                  "initialized": false
+                },
+                "lineChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "stackedAreaChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                },
+                "multiBarChart": {
+                  "rotate": {
+                    "degree": "-45"
+                  },
+                  "xLabelStatus": "default"
+                }
+              },
+              "commonSetting": {},
+              "keys": [
+                {
+                  "name": "temperature",
+                  "index": 0.0,
+                  "aggr": "sum"
+                }
+              ],
+              "groups": [],
+              "values": [
+                {
+                  "name": "position",
+                  "index": 1.0,
+                  "aggr": "sum"
+                }
+              ]
+            },
+            "helium": {}
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TABLE",
+            "data": "temperature\tposition\n6.99\t25316\n6.88\t25316\n6.88\t25316\n6.88\t25316\n6.88\t25316\n7.0\t25316\n6.89\t25316\n7.0\t25316\n7.0\t25316\n6.89\t25316\n6.89\t25316\n6.89\t25316\n7.0\t25316\n6.88\t25316\n6.99\t25316\n6.99\t25316\n6.87\t25316\n6.76\t25316\n6.76\t25320\n6.76\t25320\n6.76\t25320\n6.76\t25320\n6.66\t25320\n6.55\t25320\n6.55\t25320\n6.55\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.45\t25320\n6.34\t25320\n6.34\t25320\n6.34\t25320\n6.34\t25320\n6.45\t25320\n6.24\t25320\n6.24\t25320\n6.24\t25320\n6.24\t25320\n6.13\t25320\n6.25\t25320\n6.14\t25320\n6.25\t25320\n6.14\t25320\n6.14\t25320\n6.14\t25320\n6.14\t25320\n6.14\t25320\n6.14\t25320\n6.03\t25320\n6.03\t25320\n5.93\t25320\n5.93\t25320\n5.93\t25320\n13.89\t25622\n11.55\t25577\n"
+          },
+          {
+            "type": "TEXT",
+            "data": "\u001b[1m\u001b[34msanitized\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m \u003d [temperature: double, position: int]\n\u001b[1m\u001b[34mextra\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.DataFrame\u001b[0m \u003d [temperature: double, position: int]\n\u001b[1m\u001b[34mready\u001b[0m: \u001b[1m\u001b[32morg.apache.spark.sql.Dataset[org.apache.spark.sql.Row]\u001b[0m \u003d [temperature: double, position: int]\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {
+        "jobUrl": {
+          "propertyName": "jobUrl",
+          "label": "SPARK JOB",
+          "tooltip": "View in Spark web UI",
+          "group": "spark",
+          "values": [
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d420"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d421"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d422"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d423"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d424"
+            },
+            {
+              "jobUrl": "http://52b9a5fccb5f:4040/jobs/job?id\u003d425"
+            }
+          ],
+          "interpreterSettingId": "spark"
+        }
+      },
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1683814953571_1305370286",
+      "id": "paragraph_1683814953571_1305370286",
+      "dateCreated": "2023-05-11 14:22:33.571",
+      "dateStarted": "2023-05-13 05:41:33.242",
+      "dateFinished": "2023-05-13 05:41:34.180",
+      "status": "FINISHED"
+    },
+    {
+      "text": "import org.apache.spark.ml.regression.LinearRegression\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2023-05-13 05:46:30.841",
+      "progress": 100,
+      "config": {
+        "editorSetting": {
+          "language": "scala",
+          "editOnDblClick": false,
+          "completionKey": "TAB",
+          "completionSupport": true
+        },
+        "colWidth": 12.0,
+        "editorMode": "ace/mode/scala",
+        "fontSize": 9.0,
+        "editorHide": false,
+        "results": {
+          "0": {
+            "graph": {
+              "mode": "table",
+              "height": 214.0,
+              "optionOpen": false
+            }
+          }
+        },
+        "enabled": true
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "import org.apache.spark.ml.regression.LinearRegression\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1683953715432_1340023368",
+      "id": "paragraph_1683953715432_1340023368",
+      "dateCreated": "2023-05-13 04:55:15.432",
+      "dateStarted": "2023-05-13 05:46:30.842",
+      "dateFinished": "2023-05-13 05:46:30.948",
+      "status": "FINISHED"
+    },
+    {
+      "user": "anonymous",
+      "progress": 0,
+      "config": {},
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1683819791825_1792069194",
+      "id": "paragraph_1683819791825_1792069194",
+      "dateCreated": "2023-05-11 15:43:11.825",
       "status": "READY"
     }
   ],
@@ -83,7 +342,5 @@
   "config": {
     "isZeppelinNotebookCronEnable": false
   },
-  "info": {
-    "isRunning": false
-  }
+  "info": {}
 }

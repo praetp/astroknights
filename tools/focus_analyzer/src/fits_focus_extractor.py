@@ -23,10 +23,10 @@ if __name__ == "__main__":
     fits_files = sorted(fits_files)
     index = 1
     with open(outputfile, 'w') as f:
-        f.write("Filename Index Temperature Position\n")
+        f.write("filename,index,temperature,position\n")
         for fits_file in fits_files:
             hdulist = fits.open(fits_file)
             temp = hdulist[0].header['FOCUSTEM']
             position = hdulist[0].header['FOCUSPOS']
-            f.write("%s %d %2.2lf %d\n" % (fits_file, index, temp, position))
+            f.write("%s,%d,%2.2lf,%d\n" % (fits_file, index, temp, position))
             index = index + 1
