@@ -26,6 +26,7 @@ if ping -c 1 ${REMOTE} > /dev/null; then
 		echo "Removal done" 
 
 	fi
+	echo "Do not forget to update the database in kstars"
 
 else 
 	echo "${REMOTE} is not up" 
