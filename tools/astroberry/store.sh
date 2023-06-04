@@ -11,7 +11,7 @@ if ping -c 1 ${REMOTE} > /dev/null; then
 	if [ $ANSWER = "yes" ]; then
 		rm -rf ${SRC}/process
 	fi
-	OLDEST_LIGHT=$(find ${SRC}/Light -type f -printf '%TY%Tm%Td\n' | sort | head -n 1)
+	OLDEST_LIGHT=$(find ${SRC}/Light -type f -printf '%TY-%Tm-%Td\n' | sort | head -n 1)
 	DEST_FULL=${DEST}/${SRC}/${OLDEST_LIGHT}
 	
 	mkdir -p ${DEST_FULL}
@@ -20,14 +20,13 @@ if ping -c 1 ${REMOTE} > /dev/null; then
 	rmdir ${SRC}
 
 	ssh ${REMOTE} "find /camera/${SRC}"
-	read -p "OK to remove these files ? (yes/no)" ANSWER
+	read -p "OK to remove these files on astroberry ? (yes/no)" ANSWER
 	if [ $ANSWER = "yes" ]; then
 		ssh ${REMOTE} "rm -rf /camera/${SRC}"
 		echo "Removal done" 
 
 	fi
 	echo "Do not forget to update the database in kstars"
-
 else 
 	echo "${REMOTE} is not up" 
 fi
