@@ -9,7 +9,7 @@ set -xEeuo pipefail
 #For now this script must be run from the directory where the Lights/ Flats/ .. directories are
 SCRIPT_DIR=$(realpath $BASH_SOURCE)/../scripts
 
-
+FIT_SUFFIX=".fit.fz"
 MASTER_FLAT_ARG=""
 MASTER_DARK_ARG=""
 BIAS_ARG=""
@@ -38,7 +38,7 @@ if [ -d "Bias" ]; then
 fi
 
 #either take masterBias or use synthetic bias
-if [ -e "masters/masterBias.fit" ]; then
+if [ -e "masters/masterBias$FIT_SUFFIX" ]; then
 	BIAS_ARG="-bias=../masters/masterBias"
 elif [ -e "biases" ]; then
 siril -s - << END_OF_SCRIPT
@@ -73,7 +73,7 @@ if [ -d "Flat" ]; then
 	fi
 fi
 
-if [ -f "masters/masterFlat.fit" ]; then
+if [ -f "masters/masterFlat$FIT_SUFFIX" ]; then
 	echo "Reusing masterFlat"
 	MASTER_FLAT_ARG="-flat=../masters/masterFlat"
 elif [ -e "flats" ]; then
@@ -112,7 +112,7 @@ if [ -d "Dark" ]; then
 	fi
 fi
 
-if [ -f "masters/masterDark.fit" ]; then
+if [ -f "masters/masterDark$FIT_SUFFIX" ]; then
 	echo "Reusing masterDark"
 	MASTER_DARK_ARG="-dark=../masters/masterDark -cc=dark"
 	echo "Reusing existing masterDark."
