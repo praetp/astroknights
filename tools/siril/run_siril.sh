@@ -175,40 +175,44 @@ calibrate light ${BIAS_ARG} ${MASTER_DARK_ARG} ${MASTER_FLAT_ARG} -cfa ${PREPROC
 END_OF_SCRIPT
 
 if [[ "$INPUTTYPE" == "dualband" ]]; then
-	echo "processing Halpha"
-siril -s - <<END_OF_SCRIPT_DUALBAND_HA
+siril -s - <<END_OF_SCRIPT_DUALBAND
 requires 1.2.0
 cd "$PWD"
 cd process
-seqsubsky pp_light 1
-# Extract Ha and OIII
-seqextract_HaOIII bkg_pp_light
+# Extract Ha
+seqextract_HaOIII pp_light
 
 # Align Ha lights
-register Ha_bkg_pp_light -drizzle
+register Ha_pp_light -drizzle
 
-# Stack calibrated Ha lights to Ha_result.fit
-stack r_Ha_bkg_pp_light rej 3 3 -norm=addscale -output_norm -out=../Ha_result
+# Stack calibrated Ha lights to Ha_stack (temporary)
+stack r_Ha_pp_light rej 3 3 -norm=addscale -output_norm -out=results_00001
 
-END_OF_SCRIPT_DUALBAND_HA
-	echo "processing OIII"
-siril -s - <<END_OF_SCRIPT_DUALBAND_OIII
-requires 1.2.0
-cd "$PWD"
-cd process
+# and flip if required
+mirrorx_single results_00001
+
 # Align OIII lights
-register OIII_bkg_pp_light -drizzle
+register OIII_pp_light
 
 # Stack calibrated Ha lights to OIII_result.fit
-stack r_OIII_bkg_pp_light rej 3 3 -norm=addscale -output_norm -out=../OIII_result
-cd ..
+stack r_OIII_pp_light rej 3 3 -norm=addscale -output_norm -out=results_00002
 
-# Make linear match on OIII frame based upon Ha frame
-load OIII_result
-linear_match Ha_result 0 0.92
-save OIII_result
+# and flip if required
+mirrorx_single results_00002
 
-END_OF_SCRIPT_DUALBAND_OIII
+# Align the result images, small shifts and chromatic aberrations can occur
+register results -transf=shift -interp=none
+
+# Renorm OIII to Ha using PixelMath
+pm \$r_results_00002\$*mad(\$r_results_00001\$)/mad(\$r_results_00002\$)-mad(\$r_results_00001\$)/mad(\$r_results_00002\$)*median(\$r_results_00002\$)+median(\$r_results_00001\$)
+save ../results/result_OIII_\$LIVETIME:%d\$s
+
+# Save Ha final result
+load r_results_00001
+save ../results/result_Ha_\$LIVETIME:%d\$s
+
+close
+END_OF_SCRIPT_DUALBAND
 elif [[ "$INPUTTYPE" == "osc" ]]; then
 #rm -rf process/pp* #save some space
 
