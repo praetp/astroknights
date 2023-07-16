@@ -225,8 +225,8 @@ cd process
 register pp_light ${DRIZZLE}
 
 # Stack calibrated lights to result.fit
-stack r_pp_light rej 3 3 -norm=addscale -output_norm -filter-wfwhm=90% -weight_from_wfwhm -out=../result_all
-stack r_pp_light rej 3 3 -norm=addscale -output_norm -filter-fwhm=4 -weight_from_wfwhm -out=../result_sharp
+stack r_pp_light rej 3 3 -norm=addscale -output_norm -weight_from_wfwhm -out=../results/result_all_\$LIVETIME:%d\$s
+stack r_pp_light rej 3 3 -norm=addscale -output_norm -filter-fwhm=4 -weight_from_wfwhm -out=../results/result_sharp_\$LIVETIME:%d\$s
 
 cd ..
 close
