@@ -1,5 +1,5 @@
 #!/bin/bash 
-set -Eeuo pipefail
+set -xEeuo pipefail
 
 REMOTE=astroberry.local
 SRC=$1

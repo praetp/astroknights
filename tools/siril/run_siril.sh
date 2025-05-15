@@ -117,11 +117,11 @@ if [ -f "masters/masterDark$FIT_SUFFIX" ]; then
 	MASTER_DARK_ARG="-dark=../masters/masterDark -cc=dark"
 	echo "Reusing existing masterDark."
 elif [ -e "darks" ]; then
-	cd "$PWD"
 siril -s - <<END_OF_SCRIPT
 requires 1.2.0
 
 # Convert Dark Frames to .fit files
+	cd "$PWD"
 cd darks
 convert dark -out=../process
 cd ../process
