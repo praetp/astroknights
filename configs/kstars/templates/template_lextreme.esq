@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SequenceQueue version='2.6'>
+<GuideDeviation enabled='true'>3</GuideDeviation>
+<GuideStartDeviation enabled='true'>2</GuideStartDeviation>
+<HFRCheck enabled='false'>
+<HFRDeviation>1.33</HFRDeviation>
+<HFRCheckAlgorithm>0</HFRCheckAlgorithm>
+<HFRCheckThreshold>10</HFRCheckThreshold>
+<HFRCheckFrames>1</HFRCheckFrames>
+</HFRCheck>
+<RefocusOnTemperatureDelta enabled='true'>1</RefocusOnTemperatureDelta>
+<RefocusEveryN enabled='false'>60</RefocusEveryN>
+<RefocusOnMeridianFlip enabled='false'/>
+<Job>
+<Exposure>300</Exposure>
+<Format>Raw 16 bit</Format>
+<Encoding>FITS</Encoding>
+<Binning>
+<X>1</X>
+<Y>1</Y>
+</Binning>
+<Frame>
+<X>0</X>
+<Y>0</Y>
+<W>3008</W>
+<H>3008</H>
+</Frame>
+<Temperature force='false'>-15</Temperature>
+<Filter>Optolong_Lextreme</Filter>
+<Type>Light</Type>
+<Count>240</Count>
+<Delay>0</Delay>
+<TargetName></TargetName>
+<GuideDitherPerJob>0</GuideDitherPerJob>
+<FITSDirectory>/camera</FITSDirectory>
+<PlaceholderFormat>/%t/%T/%F/%t_%T_%F_%e_%D</PlaceholderFormat>
+<PlaceholderSuffix>4</PlaceholderSuffix>
+<UploadMode>0</UploadMode>
+<RemoteDirectory>/camera</RemoteDirectory>
+<Properties>
+</Properties>
+<Calibration>
+<PreAction>
+<Type>1</Type>
+</PreAction>
+<FlatDuration dark='false'>
+<Type>Manual</Type>
+</FlatDuration>
+</Calibration>
+</Job>
+</SequenceQueue>

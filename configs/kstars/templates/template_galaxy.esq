@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SequenceQueue version='2.5'>
+<GuideDeviation enabled='true'>3</GuideDeviation>
+<GuideStartDeviation enabled='true'>2</GuideStartDeviation>
+<Autofocus enabled='false'>2</Autofocus>
+<RefocusOnTemperatureDelta enabled='true'>1</RefocusOnTemperatureDelta>
+<RefocusEveryN enabled='false'>60</RefocusEveryN>
+<RefocusOnMeridianFlip enabled='true'/>
+<Job>
+<Exposure>60</Exposure>
+<Format>Raw 16 bit</Format>
+<Encoding>FITS</Encoding>
+<Binning>
+<X>1</X>
+<Y>1</Y>
+</Binning>
+<Frame>
+<X>0</X>
+<Y>0</Y>
+<W>3008</W>
+<H>3008</H>
+</Frame>
+<Temperature force='true'>-10</Temperature>
+<Filter>Optolong_UVIR</Filter>
+<Type>Light</Type>
+<Prefix>
+<FilterEnabled>0</FilterEnabled>
+<ExpEnabled>0</ExpEnabled>
+<TimeStampEnabled>0</TimeStampEnabled>
+</Prefix>
+<Count>600</Count>
+<Delay>0</Delay>
+<FITSDirectory>/camera</FITSDirectory>
+<PlaceholderFormat>/%t/%T/%F/%t_%T_%F_%e_%D</PlaceholderFormat>
+<PlaceholderSuffix>4</PlaceholderSuffix>
+<UploadMode>0</UploadMode>
+<RemoteDirectory>/camera</RemoteDirectory>
+<Properties>
+</Properties>
+<Calibration>
+<FlatSource>
+<Type>Manual</Type>
+</FlatSource>
+<FlatDuration dark='false'>
+<Type>Manual</Type>
+</FlatDuration>
+<PreMountPark>False</PreMountPark>
+<PreDomePark>False</PreDomePark>
+</Calibration>
+</Job>
+</SequenceQueue>
