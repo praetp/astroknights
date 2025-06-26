@@ -1,10 +1,10 @@
 <INDIDriver>
     <newSwitchVector device="Telescope Simulator" name="DEBUG">
         <oneSwitch name="ENABLE">
-Off
+On
         </oneSwitch>
         <oneSwitch name="DISABLE">
-On
+Off
         </oneSwitch>
     </newSwitchVector>
     <newNumberVector device="Telescope Simulator" name="POLLING_PERIOD">
@@ -64,10 +64,10 @@ On
 On
         </oneSwitch>
         <oneSwitch name="DBG_DEBUG">
-Off
+On
         </oneSwitch>
         <oneSwitch name="DBG_EXTRA_1">
-Off
+On
         </oneSwitch>
     </newSwitchVector>
     <newSwitchVector device="Telescope Simulator" name="LOGGING_LEVEL">
@@ -122,6 +122,14 @@ Off
       8.9799995399999996692
         </oneNumber>
     </newNumberVector>
+    <newSwitchVector device="Telescope Simulator" name="TELESCOPE_REVERSE_MOTION">
+        <oneSwitch name="REVERSE_NS">
+Off
+        </oneSwitch>
+        <oneSwitch name="REVERSE_WE">
+Off
+        </oneSwitch>
+    </newSwitchVector>
     <newSwitchVector device="Telescope Simulator" name="TELESCOPE_SLEW_RATE">
         <oneSwitch name="1x">
 Off

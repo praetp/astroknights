@@ -25,9 +25,6 @@ On
         <oneSwitch name="DBG_DEBUG">
 On
         </oneSwitch>
-        <oneSwitch name="DBG_EXTRA_1">
-On
-        </oneSwitch>
     </newSwitchVector>
     <newSwitchVector device="ZWO CCD ASI120MM Mini" name="LOGGING_LEVEL">
         <oneSwitch name="LOG_ERROR">
@@ -42,9 +39,6 @@ On
         <oneSwitch name="LOG_DEBUG">
 Off
         </oneSwitch>
-        <oneSwitch name="LOG_EXTRA_1">
-Off
-        </oneSwitch>
     </newSwitchVector>
     <newSwitchVector device="ZWO CCD ASI120MM Mini" name="LOG_OUTPUT">
         <oneSwitch name="CLIENT_DEBUG">
@@ -56,13 +50,11 @@ Off
     </newSwitchVector>
     <newTextVector device="ZWO CCD ASI533MC Pro" name="ACTIVE_DEVICES">
         <oneText name="ACTIVE_TELESCOPE">
-EQMod Mount
+ZWO AM5 USB
         </oneText>
-        <oneText name="ACTIVE_ROTATOR">
-Rotator Simulator
-        </oneText>
+        <oneText name="ACTIVE_ROTATOR"/>
         <oneText name="ACTIVE_FOCUSER">
-Focuser Simulator
+ZWO EAF
         </oneText>
         <oneText name="ACTIVE_FILTER">
 Manual Filter
@@ -84,20 +76,12 @@ Off
     </newSwitchVector>
     <newTextVector device="ZWO CCD ASI533MC Pro" name="UPLOAD_SETTINGS">
         <oneText name="UPLOAD_DIR">
-/camera/M_3/Light/Optolong_UVIR_Cut
+/camera/M_51/Flat/Optolong_UVIR
         </oneText>
         <oneText name="UPLOAD_PREFIX">
-M_3_Light_Optolong_UVIR_Cut_60_secs_ISO8601_XXX
+M_51_Flat_Optolong_UVIR_0.010_secs_ISO8601_XXX
         </oneText>
     </newTextVector>
-    <newSwitchVector device="ZWO CCD ASI533MC Pro" name="TELESCOPE_TYPE">
-        <oneSwitch name="TELESCOPE_PRIMARY">
-On
-        </oneSwitch>
-        <oneSwitch name="TELESCOPE_GUIDE">
-Off
-        </oneSwitch>
-    </newSwitchVector>
     <newSwitchVector device="ZWO CCD ASI533MC Pro" name="CCD_FAST_TOGGLE">
         <oneSwitch name="INDI_ENABLED">
 Off
@@ -116,16 +100,16 @@ On
     </newSwitchVector>
     <newSwitchVector device="ZWO CCD ASI533MC Pro" name="CCD_CAPTURE_FORMAT">
         <oneSwitch name="ASI_IMG_RAW8">
-      Off
+Off
         </oneSwitch>
         <oneSwitch name="ASI_IMG_RGB24">
-      Off
+Off
         </oneSwitch>
         <oneSwitch name="ASI_IMG_Y8">
-      Off
+Off
         </oneSwitch>
         <oneSwitch name="ASI_IMG_RAW16">
-      On
+On
         </oneSwitch>
     </newSwitchVector>
     <newSwitchVector device="ZWO CCD ASI533MC Pro" name="CCD_TRANSFER_FORMAT">
@@ -133,6 +117,9 @@ On
 On
         </oneSwitch>
         <oneSwitch name="FORMAT_NATIVE">
+Off
+        </oneSwitch>
+        <oneSwitch name="FORMAT_XISF">
 Off
         </oneSwitch>
     </newSwitchVector>
@@ -187,7 +174,7 @@ Off
     </newSwitchVector>
     <newTextVector device="ZWO CCD ASI533MC Pro" name="RECORD_FILE">
         <oneText name="RECORD_FILE_DIR">
-/home/astroberry/indi__D_
+/home/spetsnaz/indi__D_
         </oneText>
         <oneText name="RECORD_FILE_NAME">
 indi_record__T_
@@ -205,9 +192,6 @@ indi_record__T_
         <oneSwitch name="SER">
 On
         </oneSwitch>
-        <oneSwitch name="OGV">
-Off
-        </oneSwitch>
     </newSwitchVector>
     <newNumberVector device="ZWO CCD ASI533MC Pro" name="LIMITS">
         <oneNumber name="LIMITS_BUFFER_MAX">
@@ -215,6 +199,14 @@ Off
         </oneNumber>
         <oneNumber name="LIMITS_PREVIEW_FPS">
 10
+        </oneNumber>
+    </newNumberVector>
+    <newNumberVector device="ZWO CCD ASI533MC Pro" name="SCOPE_INFO">
+        <oneNumber name="FOCAL_LENGTH">
+800
+        </oneNumber>
+        <oneNumber name="APERTURE">
+115
         </oneNumber>
     </newNumberVector>
     <newSwitchVector device="ZWO CCD ASI533MC Pro" name="CCD_COOLER">
@@ -227,34 +219,34 @@ Off
     </newSwitchVector>
     <newNumberVector device="ZWO CCD ASI533MC Pro" name="CCD_CONTROLS">
         <oneNumber name="Gain">
-222
+      100
         </oneNumber>
         <oneNumber name="WB_R">
-50
+      50
         </oneNumber>
         <oneNumber name="WB_B">
-50
+      50
         </oneNumber>
         <oneNumber name="Offset">
-20
+      5
         </oneNumber>
         <oneNumber name="BandWidth">
-40
+      40
         </oneNumber>
         <oneNumber name="AutoExpMaxGain">
-300
+      300
         </oneNumber>
         <oneNumber name="AutoExpMaxExpMS">
-30000
+      30000
         </oneNumber>
         <oneNumber name="AutoExpTargetBrightness">
-100
+      100
         </oneNumber>
         <oneNumber name="HardwareBin">
-0
+      0
         </oneNumber>
         <oneNumber name="MonoBin">
-0
+      0
         </oneNumber>
     </newNumberVector>
     <newSwitchVector device="ZWO CCD ASI533MC Pro" name="CCD_CONTROLS_MODE">

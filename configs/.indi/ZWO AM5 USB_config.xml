@@ -1,5 +1,5 @@
 <INDIDriver>
-    <newSwitchVector device="EQMod Mount" name="DEBUG">
+    <newSwitchVector device="ZWO AM5 USB" name="DEBUG">
         <oneSwitch name="ENABLE">
 On
         </oneSwitch>
@@ -7,12 +7,12 @@ On
 Off
         </oneSwitch>
     </newSwitchVector>
-    <newNumberVector device="EQMod Mount" name="POLLING_PERIOD">
+    <newNumberVector device="ZWO AM5 USB" name="POLLING_PERIOD">
         <oneNumber name="PERIOD_MS">
 1000
         </oneNumber>
     </newNumberVector>
-    <newSwitchVector device="EQMod Mount" name="CONNECTION_MODE">
+    <newSwitchVector device="ZWO AM5 USB" name="CONNECTION_MODE">
         <oneSwitch name="CONNECTION_SERIAL">
 On
         </oneSwitch>
@@ -20,12 +20,12 @@ On
 Off
         </oneSwitch>
     </newSwitchVector>
-    <newTextVector device="EQMod Mount" name="DEVICE_PORT">
+    <newTextVector device="ZWO AM5 USB" name="DEVICE_PORT">
         <oneText name="PORT">
-/dev/ttyUSB0
+/dev/ttyACM0
         </oneText>
     </newTextVector>
-    <newSwitchVector device="EQMod Mount" name="DEVICE_BAUD_RATE">
+    <newSwitchVector device="ZWO AM5 USB" name="DEVICE_BAUD_RATE">
         <oneSwitch name="9600">
 On
         </oneSwitch>
@@ -45,7 +45,7 @@ Off
 Off
         </oneSwitch>
     </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="DEVICE_AUTO_SEARCH">
+    <newSwitchVector device="ZWO AM5 USB" name="DEVICE_AUTO_SEARCH">
         <oneSwitch name="INDI_ENABLED">
 On
         </oneSwitch>
@@ -53,7 +53,7 @@ On
 Off
         </oneSwitch>
     </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="DEBUG_LEVEL">
+    <newSwitchVector device="ZWO AM5 USB" name="DEBUG_LEVEL">
         <oneSwitch name="DBG_ERROR">
 On
         </oneSwitch>
@@ -69,17 +69,8 @@ On
         <oneSwitch name="DBG_EXTRA_1">
 On
         </oneSwitch>
-        <oneSwitch name="DBG_EXTRA_2">
-On
-        </oneSwitch>
-        <oneSwitch name="DBG_EXTRA_3">
-On
-        </oneSwitch>
-        <oneSwitch name="DBG_EXTRA_4">
-On
-        </oneSwitch>
     </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="LOGGING_LEVEL">
+    <newSwitchVector device="ZWO AM5 USB" name="LOGGING_LEVEL">
         <oneSwitch name="LOG_ERROR">
 On
         </oneSwitch>
@@ -90,38 +81,27 @@ On
 On
         </oneSwitch>
         <oneSwitch name="LOG_DEBUG">
-On
+Off
         </oneSwitch>
         <oneSwitch name="LOG_EXTRA_1">
-On
-        </oneSwitch>
-        <oneSwitch name="LOG_EXTRA_2">
-On
-        </oneSwitch>
-        <oneSwitch name="LOG_EXTRA_3">
-On
-        </oneSwitch>
-        <oneSwitch name="LOG_EXTRA_4">
-On
+Off
         </oneSwitch>
     </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="LOG_OUTPUT">
+    <newSwitchVector device="ZWO AM5 USB" name="LOG_OUTPUT">
         <oneSwitch name="CLIENT_DEBUG">
 On
         </oneSwitch>
         <oneSwitch name="FILE_DEBUG">
-On
+Off
         </oneSwitch>
     </newSwitchVector>
-    <newTextVector device="EQMod Mount" name="ACTIVE_DEVICES">
-        <oneText name="ACTIVE_GPS">
-GPS Simulator
-        </oneText>
+    <newTextVector device="ZWO AM5 USB" name="ACTIVE_DEVICES">
+        <oneText name="ACTIVE_GPS"/>
         <oneText name="ACTIVE_DOME">
 Dome Simulator
         </oneText>
     </newTextVector>
-    <newSwitchVector device="EQMod Mount" name="DOME_POLICY">
+    <newSwitchVector device="ZWO AM5 USB" name="DOME_POLICY">
         <oneSwitch name="DOME_IGNORED">
 On
         </oneSwitch>
@@ -129,7 +109,7 @@ On
 Off
         </oneSwitch>
     </newSwitchVector>
-    <newNumberVector device="EQMod Mount" name="GEOGRAPHIC_COORD">
+    <newNumberVector device="ZWO AM5 USB" name="GEOGRAPHIC_COORD">
         <oneNumber name="LAT">
       51.216666666666668561
         </oneNumber>
@@ -140,7 +120,7 @@ Off
       8.9799995399999996692
         </oneNumber>
     </newNumberVector>
-    <newSwitchVector device="EQMod Mount" name="TELESCOPE_REVERSE_MOTION">
+    <newSwitchVector device="ZWO AM5 USB" name="TELESCOPE_REVERSE_MOTION">
         <oneSwitch name="REVERSE_NS">
 Off
         </oneSwitch>
@@ -148,7 +128,7 @@ Off
 Off
         </oneSwitch>
     </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="TELESCOPE_SLEW_RATE">
+    <newSwitchVector device="ZWO AM5 USB" name="TELESCOPE_SLEW_RATE">
         <oneSwitch name="1x">
 Off
         </oneSwitch>
@@ -171,19 +151,13 @@ Off
 Off
         </oneSwitch>
         <oneSwitch name="8x">
-On
+Off
         </oneSwitch>
         <oneSwitch name="9x">
-Off
-        </oneSwitch>
-        <oneSwitch name="SLEW_MAX">
-Off
-        </oneSwitch>
-        <oneSwitch name="SLEWCUSTOM">
-Off
+On
         </oneSwitch>
     </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="TELESCOPE_TRACK_MODE">
+    <newSwitchVector device="ZWO AM5 USB" name="TELESCOPE_TRACK_MODE">
         <oneSwitch name="TRACK_SIDEREAL">
 On
         </oneSwitch>
@@ -197,23 +171,15 @@ Off
 Off
         </oneSwitch>
     </newSwitchVector>
-    <newNumberVector device="EQMod Mount" name="TELESCOPE_TRACK_RATE">
-        <oneNumber name="TRACK_RATE_RA">
-15.04106717867020393
-        </oneNumber>
-        <oneNumber name="TRACK_RATE_DE">
-0
-        </oneNumber>
-    </newNumberVector>
-    <newSwitchVector device="EQMod Mount" name="USEJOYSTICK">
+    <newSwitchVector device="ZWO AM5 USB" name="USEJOYSTICK">
         <oneSwitch name="ENABLE">
-On
-        </oneSwitch>
-        <oneSwitch name="DISABLE">
 Off
         </oneSwitch>
+        <oneSwitch name="DISABLE">
+On
+        </oneSwitch>
     </newSwitchVector>
-    <newTextVector device="EQMod Mount" name="JOYSTICKSETTINGS">
+    <newTextVector device="ZWO AM5 USB" name="JOYSTICKSETTINGS">
         <oneText name="MOTIONDIR">
 JOYSTICK_1
         </oneText>
@@ -242,12 +208,12 @@ BUTTON_2
 BUTTON_3
         </oneText>
     </newTextVector>
-    <newTextVector device="EQMod Mount" name="SNOOP_JOYSTICK">
+    <newTextVector device="ZWO AM5 USB" name="SNOOP_JOYSTICK">
         <oneText name="SNOOP_JOYSTICK_DEVICE">
 Joystick
         </oneText>
     </newTextVector>
-    <newSwitchVector device="EQMod Mount" name="MOTION_CONTROL_MODE">
+    <newSwitchVector device="ZWO AM5 USB" name="MOTION_CONTROL_MODE">
         <oneSwitch name="MOTION_CONTROL_MODE_JOYSTICK">
 On
         </oneSwitch>
@@ -255,7 +221,7 @@ On
 Off
         </oneSwitch>
     </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="JOYSTICK_LOCK_AXIS">
+    <newSwitchVector device="ZWO AM5 USB" name="JOYSTICK_LOCK_AXIS">
         <oneSwitch name="LOCK_AXIS_1">
 Off
         </oneSwitch>
@@ -263,7 +229,7 @@ Off
 Off
         </oneSwitch>
     </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="SIMULATE_PIER_SIDE">
+    <newSwitchVector device="ZWO AM5 USB" name="SIMULATE_PIER_SIDE">
         <oneSwitch name="SIMULATE_YES">
 Off
         </oneSwitch>
@@ -271,86 +237,11 @@ Off
 On
         </oneSwitch>
     </newSwitchVector>
-    <newNumberVector device="EQMod Mount" name="BACKLASH">
-        <oneNumber name="BACKLASHRA">
-10
-        </oneNumber>
-        <oneNumber name="BACKLASHDE">
-10
-        </oneNumber>
-    </newNumberVector>
-    <newSwitchVector device="EQMod Mount" name="USEBACKLASH">
-        <oneSwitch name="USEBACKLASHRA">
+    <newSwitchVector device="ZWO AM5 USB" name="Use Pulse Cmd">
+        <oneSwitch name="Off">
 Off
         </oneSwitch>
-        <oneSwitch name="USEBACKLASHDE">
-Off
-        </oneSwitch>
-    </newSwitchVector>
-    <newNumberVector device="EQMod Mount" name="GUIDE_RATE">
-        <oneNumber name="GUIDE_RATE_WE">
-0.5
-        </oneNumber>
-        <oneNumber name="GUIDE_RATE_NS">
-0.5
-        </oneNumber>
-    </newNumberVector>
-    <newNumberVector device="EQMod Mount" name="PULSE_LIMITS">
-        <oneNumber name="MIN_PULSE">
-10
-        </oneNumber>
-        <oneNumber name="MIN_PULSE_TIMER">
-100
-        </oneNumber>
-    </newNumberVector>
-    <newNumberVector device="EQMod Mount" name="SLEWSPEEDS">
-        <oneNumber name="RASLEW">
-800
-        </oneNumber>
-        <oneNumber name="DESLEW">
-800
-        </oneNumber>
-    </newNumberVector>
-    <newSwitchVector device="EQMod Mount" name="REVERSEDEC">
-        <oneSwitch name="ENABLE">
-Off
-        </oneSwitch>
-        <oneSwitch name="DISABLE">
-On
-        </oneSwitch>
-    </newSwitchVector>
-    <newNumberVector device="EQMod Mount" name="LED_BRIGHTNESS">
-        <oneNumber name="LED_BRIGHTNESS_VALUE">
-255
-        </oneNumber>
-    </newNumberVector>
-    <newSwitchVector device="EQMod Mount" name="ALIGNMODE">
-        <oneSwitch name="NOALIGN">
-Off
-        </oneSwitch>
-        <oneSwitch name="ALIGNNEAREST">
-On
-        </oneSwitch>
-        <oneSwitch name="ALIGNNSTAR">
-Off
-        </oneSwitch>
-    </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="HORIZONLIMITSONLIMIT">
-        <oneSwitch name="HORIZONLIMITSONLIMITTRACK">
-On
-        </oneSwitch>
-        <oneSwitch name="HORIZONLIMITSONLIMITSLEW">
-Off
-        </oneSwitch>
-        <oneSwitch name="HORIZONLIMITSONLIMITGOTO">
-Off
-        </oneSwitch>
-    </newSwitchVector>
-    <newSwitchVector device="EQMod Mount" name="HORIZONLIMITSLIMITGOTO">
-        <oneSwitch name="HORIZONLIMITSLIMITGOTODISABLE">
-Off
-        </oneSwitch>
-        <oneSwitch name="HORIZONLIMITSLIMITGOTOENABLE">
+        <oneSwitch name="On">
 On
         </oneSwitch>
     </newSwitchVector>
