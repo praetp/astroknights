@@ -55,7 +55,7 @@ stack bias rej 3 3 -nonorm -out=../masters/masterBias
 cd ..
 END_OF_SCRIPT
     BIAS_ARG="-bias=../masters/masterBias"
-else 
+else
 	#For Canon
 	#BIAS_ARG="-bias=\"=2048\""
 	#For ZWO 533
@@ -180,13 +180,13 @@ requires 1.2.0
 cd "$PWD"
 cd process
 # Extract Ha
-seqextract_HaOIII pp_light
+seqextract_HaOIII pp_light -resample=ha
 
 # Align Ha lights
-register Ha_pp_light -drizzle
+register Ha_pp_light
 
 # Stack calibrated Ha lights to Ha_stack (temporary)
-stack r_Ha_pp_light rej 3 3 -norm=addscale -output_norm -out=results_00001
+stack r_Ha_pp_light rej 3 3 -norm=addscale -output_norm -32b  -out=results_00001
 
 # and flip if required
 mirrorx_single results_00001
@@ -195,7 +195,7 @@ mirrorx_single results_00001
 register OIII_pp_light
 
 # Stack calibrated Ha lights to OIII_result.fit
-stack r_OIII_pp_light rej 3 3 -norm=addscale -output_norm -out=results_00002
+stack r_OIII_pp_light rej 3 3 -norm=addscale -output_norm -32b  -out=results_00002
 
 # and flip if required
 mirrorx_single results_00002
