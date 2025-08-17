@@ -14,7 +14,7 @@ MASTER_FLAT_ARG=""
 MASTER_DARK_ARG=""
 BIAS_ARG=""
 DRIZZLE="-drizzle"
-DRIZZLE="" #uncomment to enable drizzle
+DRIZZLE="" #comment to enable drizzle
 
 if [ -d "process" ]; then
 	rm -rf process
@@ -42,7 +42,7 @@ if [ -e "masters/masterBias$FIT_SUFFIX" ]; then
 	BIAS_ARG="-bias=../masters/masterBias"
 elif [ -e "biases" ]; then
 siril -s - << END_OF_SCRIPT
-requires 1.2.0
+requires 1.3.4
 
 # Convert Bias Frames to .fit files
 cd "$PWD"
@@ -79,7 +79,7 @@ if [ -f "masters/masterFlat$FIT_SUFFIX" ]; then
 elif [ -e "flats" ]; then
 
 siril -s - <<END_OF_SCRIPT
-requires 1.2.0
+requires 1.3.4
 
 # Convert Flat Frames to .fit files
 cd "$PWD"
@@ -88,7 +88,7 @@ convert flat -out=../process
 cd ../process
 
 # Pre-process Flat Frames
-preprocess flat ${BIAS_ARG}
+calibrate flat ${BIAS_ARG}
 
 # Stack Flat Frames to pp_flat_stacked.fit
 stack pp_flat rej 3 3 -norm=mul -out=../masters/masterFlat
@@ -118,7 +118,7 @@ if [ -f "masters/masterDark$FIT_SUFFIX" ]; then
 	echo "Reusing existing masterDark."
 elif [ -e "darks" ]; then
 siril -s - <<END_OF_SCRIPT
-requires 1.2.0
+requires 1.3.4
 
 # Convert Dark Frames to .fit files
 	cd "$PWD"
@@ -162,7 +162,7 @@ fi
 
 
 siril -s - <<END_OF_SCRIPT
-requires 1.2.0
+requires 1.3.4
 
 # Convert Light Frames to .fit files
 cd "$PWD"
@@ -176,7 +176,7 @@ END_OF_SCRIPT
 
 if [[ "$INPUTTYPE" == "dualband" ]]; then
 siril -s - <<END_OF_SCRIPT_DUALBAND
-requires 1.2.0
+requires 1.3.4
 cd "$PWD"
 cd process
 # Extract Ha
@@ -217,7 +217,7 @@ elif [[ "$INPUTTYPE" == "osc" ]]; then
 #rm -rf process/pp* #save some space
 
 siril -s - <<END_OF_SCRIPT_OSC
-requires 1.2.0
+requires 1.3.4
 cd "$PWD"
 cd process
 
@@ -225,8 +225,8 @@ cd process
 register pp_light ${DRIZZLE}
 
 # Stack calibrated lights to result.fit
-stack r_pp_light rej 3 3 -norm=addscale -output_norm -weight_from_wfwhm -out=../results/result_all_\$LIVETIME:%d\$s
-stack r_pp_light rej 3 3 -norm=addscale -output_norm -filter-fwhm=4 -weight_from_wfwhm -out=../results/result_sharp_\$LIVETIME:%d\$s
+stack r_pp_light rej 3 3 -norm=addscale -output_norm -weight=wfwhm -out=../results/result_all_\$LIVETIME:%d\$s
+stack r_pp_light rej 3 3 -norm=addscale -output_norm -filter-fwhm=4 -weight=wfwhm -out=../results/result_sharp_\$LIVETIME:%d\$s
 
 cd ..
 close
