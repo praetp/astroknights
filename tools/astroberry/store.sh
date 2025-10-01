@@ -19,13 +19,9 @@ if ping -c 1 ${REMOTE} > /dev/null; then
 	mv ${SRC}/* ${DEST_FULL}
 	rmdir ${SRC}
 
-	ssh ${REMOTE} "find /camera/${SRC}"
-	read -p "OK to remove these files on astroberry ? (yes/no)" ANSWER
-	if [ $ANSWER = "yes" ]; then
-		ssh ${REMOTE} "rm -rf /camera/${SRC}"
-		echo "Removal done" 
+	ssh ${REMOTE} "rm -rf /camera/${SRC}"
+	echo "Removal on astroberry done" 
 
-	fi
 	echo "Do not forget to update the database in kstars"
 else 
 	echo "${REMOTE} is not up" 
