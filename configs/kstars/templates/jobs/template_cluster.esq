@@ -36,6 +36,10 @@
 <UploadMode>0</UploadMode>
 <RemoteDirectory>/camera</RemoteDirectory>
 <Properties>
+<PropertyVector name='CCD_CONTROLS'>
+<OneElement name='Gain'>100</OneElement>
+<OneElement name='Offset'>5</OneElement>
+</PropertyVector>
 </Properties>
 <Calibration>
 <FlatSource>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SchedulerList version='2.1'>
+<Profile>Default</Profile>
+<Job>
+<JobType lead='true'/>
+<Name>NGC 896</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>2.42439</J2000RA>
+<J2000DE>62.0194</J2000DE>
+</Coordinates>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/template_lextreme.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='25'>MinimumAltitude</Constraint>
+<Constraint value='35'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<SchedulerAlgorithm value='1'/>
+<ErrorHandlingStrategy value='1'>
+<delay>0</delay>
+</ErrorHandlingStrategy>
+<StartupProcedure>
+<Procedure>UnparkMount</Procedure>
+</StartupProcedure>
+<ShutdownProcedure>
+<Procedure>WarmCCD</Procedure>
+<Procedure>ParkMount</Procedure>
+</ShutdownProcedure>
+</SchedulerList>

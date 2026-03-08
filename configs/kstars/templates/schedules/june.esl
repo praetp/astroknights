@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SchedulerList version='2.1'>
+<Profile>Default</Profile>
+<Job>
+<JobType lead='true'/>
+<Name>M 26</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>18.7552</J2000RA>
+<J2000DE>-9.38361</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/template_cluster.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='21'>MinimumAltitude</Constraint>
+<Constraint value='10'>MoonSeparation</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>M 11</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>18.8517</J2000RA>
+<J2000DE>-6.27003</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/template_cluster.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='25'>MinimumAltitude</Constraint>
+<Constraint value='10'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>M 72</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>20.8911</J2000RA>
+<J2000DE>-12.5371</J2000DE>
+</Coordinates>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/template_cluster.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='-15'>MinimumAltitude</Constraint>
+<Constraint value='15'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>M 30</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>21.6728</J2000RA>
+<J2000DE>-23.1791</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/template_cluster.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='20'>MinimumAltitude</Constraint>
+<Constraint value='10'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>M 16</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>18.3134</J2000RA>
+<J2000DE>-13.8072</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/template_cluster.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='20'>MinimumAltitude</Constraint>
+<Constraint value='10'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<SchedulerAlgorithm value='1'/>
+<ErrorHandlingStrategy value='1'>
+<delay>0</delay>
+</ErrorHandlingStrategy>
+<StartupProcedure>
+<Procedure>UnparkMount</Procedure>
+</StartupProcedure>
+<ShutdownProcedure>
+<Procedure>WarmCCD</Procedure>
+<Procedure>ParkMount</Procedure>
+</ShutdownProcedure>
+</SchedulerList>
