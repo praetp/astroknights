@@ -1,6 +1,8 @@
 #!/bin/bash
 #Partially inspired by https://davidmoulton.me/astronomy/astrophotography/2020/08/02/astrophotography-with-free-software.html
 set -xEeuo pipefail
+renice -n 19 -p $$ > /dev/null
+ionice -c 3 -p $$
 
 #This script will process flats, darks and lights.
 #It's not a problem if flats and/or darks are missing
