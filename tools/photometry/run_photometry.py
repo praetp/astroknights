@@ -40,7 +40,7 @@ def run_siril(script: str):
 
 def find_light_frames(search_dir: Path) -> list[Path]:
     frames = []
-    for p in search_dir.iterdir():
+    for p in search_dir.rglob("*"):
         if p.is_file() and p.name.lower().endswith(FIT_SUFFIXES):
             frames.append(p)
     return frames
