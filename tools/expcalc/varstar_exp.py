@@ -30,6 +30,12 @@ CAMERA_DB = {
         "sensor": "IMX533",
         "sensor_type": "osc",       # One-Shot Colour — RGGB Bayer matrix
         "adc_bits": 14,
+        "output_bits": 16,          # FITS output depth (ZWO left-shifts to 16-bit)
+        # offset_multiplier: empirically measured; ZWO applies an internal ×10 firmware
+        # scaling to ASI_BRIGHTNESS before the bit-shift.  Not officially documented.
+        # Community sources: Cloudy Nights topic/772214, AstroWorldCreations ASI533MM review.
+        # Verified: masterBias (offset=70) → median ~2621 DN ≈ 70 × 40 = 2800 DN (within 7%).
+        "offset_multiplier": 10,
         "pixel_size_um": 3.76,
         # Calibration points: gain -> (e_per_adu, full_well_e, read_noise_e)
         # Sources:
@@ -50,6 +56,11 @@ CAMERA_DB = {
         "sensor": "AR0130CS",
         "sensor_type": "mono",      # Monochrome — no Bayer matrix
         "adc_bits": 12,             # 12-bit ADC; max 4095 ADU
+        "output_bits": 16,          # FITS output depth (ZWO left-shifts to 16-bit)
+        # offset_multiplier: for 12-bit ZWO cameras (e.g. ASI290MM) the offset maps
+        # 1:1 to native ADC units — no extra firmware scaling beyond the bit-shift.
+        # pixel_floor = offset × 1 × 16 = offset × 16.  Community source: bbs.zwoastro.com/d/8396.
+        "offset_multiplier": 1,
         "pixel_size_um": 3.75,
         # Calibration points: gain -> (e_per_adu, full_well_e, read_noise_e)
         # Sources:
@@ -185,8 +196,8 @@ def parse_args():
                    help="Telescope focal length in mm (default: 800)")
     p.add_argument("--obstruction", type=float, default=0.0,
                    help="Central obstruction ratio 0–1 (default: 0.0)")
-    p.add_argument("--seeing", type=float, default=3.0,
-                   help="Atmospheric seeing FWHM in arcsec (default: 3.0)")
+    p.add_argument("--seeing", type=float, default=2.0,
+                   help="Atmospheric seeing FWHM in arcsec (default: 2.0)")
     p.add_argument("--airmass", type=float, default=1.2,
                    help="Airmass at time of observation (default: 1.2)")
     p.add_argument("--filter", choices=list(FILTER_DB.keys()), default="uv_ir_cut",
@@ -243,11 +254,17 @@ def query_vsx(star_id: str) -> dict | None:
     mag_max = _parse_mag(obj.get("MaxMag"))
     mag_min = _parse_mag(obj.get("MinMag"))
     name = obj.get("Name", star_id)
-    var_type = obj.get("Type", "?")
+    var_type = obj.get("VariabilityType") or obj.get("Type") or "?"
     period = obj.get("Period")
 
     if mag_max is None:
         return None
+
+    def _parse_float(val):
+        try:
+            return float(val) if val is not None else None
+        except (ValueError, TypeError):
+            return None
 
     return {
         "name": name,
@@ -256,6 +273,8 @@ def query_vsx(star_id: str) -> dict | None:
         "mag_min": mag_min,
         "period": period,
         "source": "VSX",
+        "ra_deg":  _parse_float(obj.get("RA2000")),
+        "dec_deg": _parse_float(obj.get("Declination2000")),
     }
 
 
@@ -268,7 +287,7 @@ def query_simbad(star_id: str) -> dict | None:
         return None
 
     simbad = Simbad()
-    simbad.add_votable_fields("flux(V)", "flux_error(V)", "otype")
+    simbad.add_votable_fields("V", "otype")
     try:
         result = simbad.query_object(star_id)
     except Exception as exc:
@@ -287,11 +306,11 @@ def query_simbad(star_id: str) -> dict | None:
         except Exception:
             return None
 
-    mag_v = _col("FLUX_V")
+    mag_v = _col("V")
     if mag_v is None:
         return None
 
-    otype = str(row.get("OTYPE", "?")).strip()
+    otype = str(row["otype"]).strip() if "otype" in row.colnames else "?"
 
     # SIMBAD doesn't reliably give us a magnitude *range*; use V as both.
     return {
@@ -301,7 +320,74 @@ def query_simbad(star_id: str) -> dict | None:
         "mag_min": None,
         "period": None,
         "source": "SIMBAD (V only — no range available)",
+        "ra_deg":  _col("ra"),
+        "dec_deg": _col("dec"),
     }
+
+
+def query_vizier_gsc(star_id: str) -> dict | None:
+    """Last-resort fallback: query VizieR Guide Star Catalog 2.4 (I/353/gsc242).
+
+    Useful for stars that have a GSC identifier (e.g. 'GSC 01234-05678') but
+    are absent from VSX and lack a V magnitude in SIMBAD.  The GSC records
+    multi-band photometry; we prefer V, then Gaia G (≈V ± 0.2 mag), then the
+    photographic F band (≈R, rougher proxy).
+    """
+    try:
+        from astroquery.vizier import Vizier
+        from astropy import units as u
+    except ImportError:
+        print("[GSC] astroquery/astropy not installed; skipping GSC lookup.", file=sys.stderr)
+        return None
+
+    v = Vizier(columns=["**"])   # request all columns so we can probe what's present
+    try:
+        tables = v.query_object(star_id, catalog="I/353/gsc242", radius=5 * u.arcsec)
+    except Exception as exc:
+        print(f"[GSC] VizieR query failed: {exc}", file=sys.stderr)
+        return None
+
+    if not tables or len(tables) == 0 or len(tables[0]) == 0:
+        return None
+
+    row = tables[0][0]   # closest match
+
+    def _col(colname):
+        try:
+            if colname not in row.colnames:
+                return None
+            val = row[colname]
+            if hasattr(val, "mask") and val.mask:
+                return None
+            return float(val)
+        except Exception:
+            return None
+
+    # Priority: standard V → Gaia G (≈V for most stars) → photographic F (≈R)
+    candidates = [
+        ("Vmag",  "V",      None),
+        ("Gmag",  "Gaia G", "Gaia G ≈ V ± 0.2 mag for most stars; small colour term"),
+        ("Fpg",   "F_pg",   "photographic F ≈ R band; V is typically ~0.3–0.5 mag brighter"),
+        ("Bj",    "B_j",    "photographic B; V magnitude requires a B-V correction (~+0.6 mag for solar-type)"),
+    ]
+    for colname, band, note in candidates:
+        mag = _col(colname)
+        if mag is not None:
+            source = f"VizieR/GSC 2.4 ({band} band) — no variability range available"
+            if note:
+                source += f"; ⚠ {note}"
+            return {
+                "name": star_id,
+                "type": "unknown (GSC only — no variability type)",
+                "mag_max": mag,
+                "mag_min": None,
+                "period": None,
+                "source": source,
+                "ra_deg":  _col("RAJ2000"),
+                "dec_deg": _col("DEJ2000"),
+            }
+
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -317,13 +403,22 @@ def _cache_path(star_id: str) -> Path:
     return CACHE_DIR / f"{safe}.json"
 
 
+CACHE_REQUIRED_FIELDS = {"ra_deg", "dec_deg"}
+
+
 def _load_cache(star_id: str) -> dict | None:
     path = _cache_path(star_id)
     if not path.exists():
         return None
     try:
         data = json.loads(path.read_text())
-        return data["star"]
+        star = data["star"]
+        if not CACHE_REQUIRED_FIELDS.issubset(star.keys()):
+            print(f"[cache] '{star_id}' cache is stale (missing fields) — re-fetching.",
+                  file=sys.stderr)
+            path.unlink()
+            return None
+        return star
     except Exception:
         return None
 
@@ -376,7 +471,14 @@ def lookup_star(star_id: str) -> dict:
         _save_cache(vsx_id, info)
         return info
 
-    print(f"ERROR: Star '{star_id}' not found in VSX or SIMBAD.", file=sys.stderr)
+    print(f"[SIMBAD] Not found or no V magnitude. Trying VizieR/GSC 2.4...", file=sys.stderr)
+    info = query_vizier_gsc(star_id)
+    if info:
+        print(f"[GSC] Found: {info['name']}", file=sys.stderr)
+        _save_cache(vsx_id, info)
+        return info
+
+    print(f"ERROR: Star '{star_id}' not found in VSX, SIMBAD, or GSC.", file=sys.stderr)
     sys.exit(1)
 
 
@@ -384,7 +486,7 @@ def lookup_star(star_id: str) -> dict:
 # Camera parameter interpolation
 # ---------------------------------------------------------------------------
 
-def get_camera_params(camera: str, gain: int) -> dict:
+def get_camera_params(camera: str, gain: int, offset: int) -> dict:
     """Interpolate camera parameters for the given gain (log-linear)."""
     db = CAMERA_DB[camera]
     cal = db["calibration"]
@@ -408,12 +510,21 @@ def get_camera_params(camera: str, gain: int) -> dict:
         read_noise = math.exp(math.log(rn_lo) + t * (math.log(rn_hi) - math.log(rn_lo)))
 
     adc_max = 2 ** db["adc_bits"] - 1
-    sat_adu = min(full_well / e_per_adu, adc_max)
+    # The offset consumes ADC headroom.  For ZWO cameras the firmware scales the
+    # offset value by offset_multiplier before adding it in the native ADC domain,
+    # so the effective headroom reduction is offset × offset_multiplier ADU.
+    effective_offset_adu = offset * db["offset_multiplier"]
+    sat_adu = min(full_well / e_per_adu, adc_max - effective_offset_adu)
+
+    bit_shift = 2 ** (db["output_bits"] - db["adc_bits"])
 
     return {
         "camera_name": db["name"],
         "sensor": db["sensor"],
         "adc_bits": db["adc_bits"],
+        "adc_max": adc_max,
+        "bit_shift": bit_shift,
+        "offset_multiplier": db["offset_multiplier"],
         "pixel_size_um": db["pixel_size_um"],
         "e_per_adu": e_per_adu,
         "full_well_e": full_well,
@@ -567,6 +678,36 @@ def fmt_mag(m) -> str:
     return "N/A" if m is None else f"{m:.2f}"
 
 
+def fmt_adu_px(adu: float, offset: int, offset_multiplier: int, bit_shift: int) -> str:
+    """Format a signal ADU value alongside its 16-bit pixel value.
+
+    pixel = (signal_adu + offset × offset_multiplier) × bit_shift
+    """
+    px = (adu + offset * offset_multiplier) * bit_shift
+    return f"{adu:.0f} ADU  →  {px:.0f} px"
+
+
+def fmt_coords(ra_deg: float | None, dec_deg: float | None) -> str:
+    """Format decimal-degree RA/Dec as  HHhMMmSS.ss  ±DDdMMmSS.s  (J2000)."""
+    if ra_deg is None or dec_deg is None:
+        return "N/A"
+    # RA
+    ra_h  = ra_deg / 15.0
+    ra_hh = int(ra_h)
+    ra_m  = (ra_h - ra_hh) * 60
+    ra_mm = int(ra_m)
+    ra_ss = (ra_m - ra_mm) * 60
+    # Dec
+    sign   = "+" if dec_deg >= 0 else "-"
+    da     = abs(dec_deg)
+    dec_dd = int(da)
+    dec_m  = (da - dec_dd) * 60
+    dec_mm = int(dec_m)
+    dec_ss = (dec_m - dec_mm) * 60
+    return (f"{ra_hh:02d}h{ra_mm:02d}m{ra_ss:05.2f}s  "
+            f"{sign}{dec_dd:02d}d{dec_mm:02d}m{dec_ss:04.1f}s")
+
+
 def snr_rating(snr: float) -> str:
     """Return a quality label and approximate photometric precision for a given SNR.
 
@@ -608,7 +749,7 @@ def main():
     star = lookup_star(args.star_id)
 
     # 2. Camera params
-    cam = get_camera_params(args.camera, args.gain)
+    cam = get_camera_params(args.camera, args.gain, args.offset)
 
     # 3. Filter + sensor type — derive effective QE for the peak pixel
     filt = FILTER_DB[args.filter]
@@ -680,6 +821,7 @@ def main():
     print(hr())
     print(f"  Name      : {star['name']}")
     print(f"  Type      : {star['type']}")
+    print(f"  Coords    : {fmt_coords(star.get('ra_deg'), star.get('dec_deg'))}  (J2000)")
     print(f"  Source    : {star['source']}")
     if star["period"]:
         print(f"  Period    : {star['period']} days")
@@ -688,13 +830,21 @@ def main():
     print()
     print("  CAMERA & SENSOR")
     print(hr())
+    bit_shift        = cam["bit_shift"]
+    offset_mult      = cam["offset_multiplier"]
+    adc_max          = cam["adc_max"]
+    target_adu       = args.target_saturation * cam["sat_adu"]
+
     print(f"  Camera    : {cam['camera_name']} ({cam['sensor']})")
-    print(f"  ADC bits  : {cam['adc_bits']}-bit  (max {2**cam['adc_bits']-1} ADU)")
+    print(f"  ADC bits  : {cam['adc_bits']}-bit  (max {adc_max} ADU  →  {adc_max * bit_shift} px  (×{bit_shift} output scaling))")
     print(f"  Gain      : {args.gain}  (e⁻/ADU = {cam['e_per_adu']:.3f})")
-    print(f"  Offset    : {args.offset}")
+    print(f"  Offset    : {args.offset}  (×{offset_mult} firmware scale × ×{bit_shift} bit-shift"
+          f"  →  floor = {args.offset * offset_mult * bit_shift} px)")
     print(f"  Full well : {cam['full_well_e']:.0f} e⁻")
     print(f"  Read noise: {cam['read_noise_e']:.2f} e⁻")
-    print(f"  Sat. ADU  : {cam['sat_adu']:.0f}  (target {args.target_saturation*100:.0f}% = {args.target_saturation*cam['sat_adu']:.0f} ADU)")
+    print(f"  Sat. ADU  : {fmt_adu_px(cam['sat_adu'], args.offset, offset_mult, bit_shift)}"
+          f"  [{adc_max} − {args.offset}×{offset_mult} = {cam['sat_adu']:.0f} ADU]"
+          f"  (target {args.target_saturation*100:.0f}% = {fmt_adu_px(target_adu, args.offset, offset_mult, bit_shift)})")
 
     print()
     print("  FILTER")
@@ -773,8 +923,8 @@ def main():
     print(f"    [target_ADU × e⁻/ADU / peak_rate  =  {args.target_saturation:.0%} × {cam['sat_adu']:.0f} × {cam['e_per_adu']:.3f} / {res_bright['peak_rate']:.2f}]")
     print(f"     work backwards: how long until the peak pixel reaches the target fill level?")
     print()
-    print(f"    Star peak pixel  : {res_bright['peak_e']:.1f} e⁻  →  {res_bright['peak_adu']:.0f} ADU  ({res_bright['sat_fraction']*100:.1f}% of saturation)")
-    print(f"    Sky per pixel    : {res_bright['sky_e']:.1f} e⁻  →  {res_bright['sky_e']/cam['e_per_adu']:.1f} ADU")
+    print(f"    Star peak pixel  : {res_bright['peak_e']:.1f} e⁻  →  {fmt_adu_px(res_bright['peak_adu'], args.offset, offset_mult, bit_shift)}  ({res_bright['sat_fraction']*100:.1f}% of saturation)")
+    print(f"    Sky per pixel    : {res_bright['sky_e']:.1f} e⁻  →  {fmt_adu_px(res_bright['sky_e']/cam['e_per_adu'], args.offset, offset_mult, bit_shift)}")
     print()
     print(f"    Noise budget (e⁻ rms):")
     print(f"      Star shot noise : √{res_bright['peak_e']:.1f}  = {res_bright['noise_shot_star']:.1f} e⁻   (Poisson: variance = signal)")
@@ -808,7 +958,7 @@ def main():
         print("  AT MINIMUM BRIGHTNESS (mag {:.2f})  — same {} exposure".format(
             mag_faint, fmt_time(t)))
         print(hr())
-        print(f"    Star peak pixel  : {peak_e_faint_at_bright_t:.1f} e⁻  →  {peak_adu_faint:.0f} ADU  ({peak_adu_faint/cam['sat_adu']*100:.1f}% of saturation)")
+        print(f"    Star peak pixel  : {peak_e_faint_at_bright_t:.1f} e⁻  →  {fmt_adu_px(peak_adu_faint, args.offset, offset_mult, bit_shift)}  ({peak_adu_faint/cam['sat_adu']*100:.1f}% of saturation)")
         print(f"    Sky per pixel    : {sky_e_faint_at_bright_t:.1f} e⁻  (unchanged)")
         print(f"    SNR (peak pixel) : {snr_faint:.1f}  → {snr_rating(snr_faint)}")
 
