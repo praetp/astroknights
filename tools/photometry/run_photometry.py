@@ -2,9 +2,8 @@
 """
 Variable star photometry pipeline.
 
-Calibrates light frames, groups by observation session (night) and exposure
-time, then registers each group. No stacking — output is ready for manual
-photometry in siril GUI.
+Calibrates light frames, groups by exposure time, then registers each group.
+No stacking — output is ready for manual photometry in siril GUI.
 
 Must be run from the directory containing Lights/, Flats/, etc.
 """
@@ -15,16 +14,12 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
-from datetime import datetime, timedelta
 
 try:
     from astropy.io import fits
 except ImportError:
     print("ERROR: astropy is required. Install with: pip install astropy")
     sys.exit(1)
-
-# Session gap threshold: frames more than this apart start a new session
-SESSION_GAP = timedelta(hours=8)
 
 FIT_SUFFIXES = (".fit", ".fits", ".fit.fz")
 
@@ -46,15 +41,9 @@ def find_light_frames(search_dir: Path) -> list[Path]:
     return frames
 
 
-def read_header(path: Path) -> tuple[datetime, float]:
+def read_exptime(path: Path) -> float:
     with fits.open(path) as hdul:
-        header = hdul[0].header
-        date_obs = header["DATE-OBS"]
-        exptime = float(header["EXPTIME"])
-    dt = datetime.fromisoformat(date_obs.replace("Z", "+00:00"))
-    # Strip timezone for comparison (treat all as UTC)
-    dt = dt.replace(tzinfo=None)
-    return dt, exptime
+        return float(hdul[0].header["EXPTIME"])
 
 
 def read_manifest(seq_dir: Path) -> set[str] | None:
@@ -83,53 +72,19 @@ def wipe_sequence(seq_dir: Path):
 
 
 def group_frames(frames: list[Path]) -> dict[str, list[Path]]:
-    """Group frames by session and exptime; return {seq_name: frames}.
+    """Group all frames by exptime; return {seq_name: frames}.
 
-    Two sessions that share the same UTC date get names like
-    session_YYYYMMDD_EXPs and session_YYYYMMDD_EXPs_b to avoid collision.
-    This can happen when observers are in UTC+ timezones and two consecutive
-    nights both have DATE-OBS timestamps that fall on the same UTC calendar date.
+    Gaps between nights are ignored — the full dataset per exposure time
+    is one sequence, which Siril photometry handles naturally.
     """
-    # Read headers
-    metadata = []
+    groups: dict[float, list[Path]] = {}
     for f in frames:
         try:
-            dt, exptime = read_header(f)
-            metadata.append((dt, exptime, f))
+            exptime = read_exptime(f)
+            groups.setdefault(exptime, []).append(f)
         except Exception as e:
             print(f"WARNING: Could not read header from {f}: {e}")
-
-    if not metadata:
-        return {}
-
-    # Sort by date
-    metadata.sort(key=lambda x: x[0])
-
-    # Split into sessions by gap
-    sessions: list[list[tuple[datetime, float, Path]]] = [[metadata[0]]]
-    for i in range(1, len(metadata)):
-        gap = metadata[i][0] - metadata[i - 1][0]
-        if gap > SESSION_GAP:
-            sessions.append([])
-        sessions[-1].append(metadata[i])
-
-    # Build {seq_name: frames}; add a suffix (_b, _c, …) when two sessions
-    # share the same (date, exptime) base name.
-    groups: dict[str, list[Path]] = {}
-    name_counts: dict[str, int] = {}
-    for session in sessions:
-        sess_date = session[0][0].strftime("%Y%m%d")
-        by_exp: dict[float, list[Path]] = {}
-        for dt, exptime, path in session:
-            by_exp.setdefault(exptime, []).append(path)
-        for exptime, paths in sorted(by_exp.items()):
-            base = f"session_{sess_date}_{exptime:.0f}s"
-            n = name_counts.get(base, 0)
-            name_counts[base] = n + 1
-            seq_name = base if n == 0 else f"{base}_{chr(ord('b') + n - 1)}"
-            groups[seq_name] = paths
-
-    return groups
+    return {f"seq_{exptime:.0f}s": frames for exptime, frames in sorted(groups.items())}
 
 
 def make_masters(cwd: Path) -> tuple[str, str, str]:
@@ -241,14 +196,11 @@ def process_sequence(
     bias_arg: str,
     dark_arg: str,
     flat_arg: str,
-    cwd: Path,
 ):
-    """Convert, calibrate, and register one (session, exptime) sequence."""
+    """Convert, calibrate, and register one exptime sequence."""
     process_dir = seq_dir / "process"
     process_dir.mkdir(parents=True, exist_ok=True)
 
-    # Write a file listing frame paths for siril's convert command
-    # siril convert works on a directory, so symlink all frames into seq_dir
     lights_link_dir = seq_dir / "lights"
     lights_link_dir.mkdir(exist_ok=True)
     for f in frames:
@@ -276,10 +228,10 @@ def main():
             "Run from the directory containing Lights/, Flats/, Darks/, etc.\n"
             "\n"
             "Examples:\n"
-            "  cd /data/targets/V404Cyg && python3 run_photometry.py\n"
+            "  cd /data/targets/GWUMa && python3 run_photometry.py\n"
             "  python3 run_photometry.py --recompute\n"
             "\n"
-            "Output: registered frames in session_YYYYMMDD_EXPs/process/r_pp_light_*.fit\n"
+            "Output: registered frames in seq_EXPs/process/r_pp_light_*.fit\n"
             "Load a sequence file (.seq) in the siril GUI to run photometry."
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -311,7 +263,6 @@ def main():
     # Find and group light frames
     print("\n=== Scanning light frames ===")
     lights_search = cwd
-    # Support Lights/ or lights/ subdirectory, or frames in cwd directly
     for candidate in ("Lights", "Light", "lights", "light"):
         d = cwd / candidate
         if d.is_dir():
@@ -329,8 +280,7 @@ def main():
         print("ERROR: Could not group any frames (header read failures?).")
         sys.exit(1)
 
-    sessions_set = {name.split("_")[1] for name in groups}
-    print(f"Detected {len(sessions_set)} session(s), {len(groups)} sequence(s):")
+    print(f"Detected {len(groups)} sequence(s):")
     for seq_name, grp_frames in sorted(groups.items()):
         print(f"  {seq_name}  — {len(grp_frames)} frame(s)")
 
@@ -352,12 +302,12 @@ def main():
 
         wipe_sequence(seq_dir)
         print(f"\n--- {seq_name} ({len(grp_frames)} frames) ---")
-        process_sequence(seq_dir, grp_frames, bias_arg, dark_arg, flat_arg, cwd)
+        process_sequence(seq_dir, grp_frames, bias_arg, dark_arg, flat_arg)
         write_manifest(seq_dir, grp_frames)
         print(f"Done: {seq_dir / 'process'}")
 
     print("\n=== Photometry pipeline complete ===")
-    print("Registered frames: session_YYYYMMDD_EXPs/process/r_pp_light_*.fit")
+    print("Registered frames: seq_EXPs/process/r_pp_light_*.fit")
     print("Load a sequence in siril GUI for photometry.")
 
 
