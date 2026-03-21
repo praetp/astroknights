@@ -82,8 +82,14 @@ def wipe_sequence(seq_dir: Path):
     (seq_dir / ".frames_manifest").unlink(missing_ok=True)
 
 
-def group_frames(frames: list[Path]) -> dict[tuple[str, float], list[Path]]:
-    """Group frames by (session_date, exptime)."""
+def group_frames(frames: list[Path]) -> dict[str, list[Path]]:
+    """Group frames by session and exptime; return {seq_name: frames}.
+
+    Two sessions that share the same UTC date get names like
+    session_YYYYMMDD_EXPs and session_YYYYMMDD_EXPs_b to avoid collision.
+    This can happen when observers are in UTC+ timezones and two consecutive
+    nights both have DATE-OBS timestamps that fall on the same UTC calendar date.
+    """
     # Read headers
     metadata = []
     for f in frames:
@@ -107,13 +113,21 @@ def group_frames(frames: list[Path]) -> dict[tuple[str, float], list[Path]]:
             sessions.append([])
         sessions[-1].append(metadata[i])
 
-    # Group by (session_date, exptime) — date from first frame in session
-    groups: dict[tuple[str, float], list[Path]] = {}
+    # Build {seq_name: frames}; add a suffix (_b, _c, …) when two sessions
+    # share the same (date, exptime) base name.
+    groups: dict[str, list[Path]] = {}
+    name_counts: dict[str, int] = {}
     for session in sessions:
         sess_date = session[0][0].strftime("%Y%m%d")
+        by_exp: dict[float, list[Path]] = {}
         for dt, exptime, path in session:
-            key = (sess_date, exptime)
-            groups.setdefault(key, []).append(path)
+            by_exp.setdefault(exptime, []).append(path)
+        for exptime, paths in sorted(by_exp.items()):
+            base = f"session_{sess_date}_{exptime:.0f}s"
+            n = name_counts.get(base, 0)
+            name_counts[base] = n + 1
+            seq_name = base if n == 0 else f"{base}_{chr(ord('b') + n - 1)}"
+            groups[seq_name] = paths
 
     return groups
 
@@ -298,7 +312,7 @@ def main():
     print("\n=== Scanning light frames ===")
     lights_search = cwd
     # Support Lights/ or lights/ subdirectory, or frames in cwd directly
-    for candidate in ("Lights", "lights", "Light", "light"):
+    for candidate in ("Lights", "Light", "lights", "light"):
         d = cwd / candidate
         if d.is_dir():
             lights_search = d
@@ -315,23 +329,21 @@ def main():
         print("ERROR: Could not group any frames (header read failures?).")
         sys.exit(1)
 
-    sessions_set = {k[0] for k in groups}
+    sessions_set = {name.split("_")[1] for name in groups}
     print(f"Detected {len(sessions_set)} session(s), {len(groups)} sequence(s):")
-    for (sess_date, exptime), grp_frames in sorted(groups.items()):
-        print(f"  session_{sess_date}_{exptime:.0f}s  — {len(grp_frames)} frame(s)")
+    for seq_name, grp_frames in sorted(groups.items()):
+        print(f"  {seq_name}  — {len(grp_frames)} frame(s)")
 
     if args.recompute:
         print("\n--recompute: wiping all sequence dirs before processing")
-        for (sess_date, exptime) in groups:
-            seq_name = f"session_{sess_date}_{exptime:.0f}s"
+        for seq_name in groups:
             seq_dir = cwd / seq_name
             if seq_dir.exists():
                 wipe_sequence(seq_dir)
 
     # Process each sequence
     print("\n=== Processing sequences ===")
-    for (sess_date, exptime), grp_frames in sorted(groups.items()):
-        seq_name = f"session_{sess_date}_{exptime:.0f}s"
+    for seq_name, grp_frames in sorted(groups.items()):
         seq_dir = cwd / seq_name
 
         if not args.recompute and sequence_is_current(seq_dir, grp_frames):
