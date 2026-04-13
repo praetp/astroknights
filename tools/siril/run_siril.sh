@@ -40,7 +40,7 @@ if [ -d "Bias" ]; then
 fi
 
 #either take masterBias or use synthetic bias
-if [ -e "masters/masterBias$FIT_SUFFIX" ]; then
+if [ -e "masters/masterBias$FIT_SUFFIX" ] || [ -e "masters/masterBias.fit" ]; then
 	BIAS_ARG="-bias=../masters/masterBias"
 elif [ -e "biases" ]; then
 siril -s - << END_OF_SCRIPT
@@ -75,7 +75,7 @@ if [ -d "Flat" ]; then
 	fi
 fi
 
-if [ -f "masters/masterFlat$FIT_SUFFIX" ]; then
+if [ -f "masters/masterFlat$FIT_SUFFIX" ] || [ -f "masters/masterFlat.fit" ]; then
 	echo "Reusing masterFlat"
 	MASTER_FLAT_ARG="-flat=../masters/masterFlat"
 elif [ -e "flats" ]; then
@@ -114,7 +114,7 @@ if [ -d "Dark" ]; then
 	fi
 fi
 
-if [ -f "masters/masterDark$FIT_SUFFIX" ]; then
+if [ -f "masters/masterDark$FIT_SUFFIX" ] || [ -f "masters/masterDark.fit" ]; then
 	echo "Reusing masterDark"
 	MASTER_DARK_ARG="-dark=../masters/masterDark -cc=dark"
 	echo "Reusing existing masterDark."
