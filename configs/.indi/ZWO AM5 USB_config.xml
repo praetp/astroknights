@@ -64,10 +64,10 @@ On
 On
         </oneSwitch>
         <oneSwitch name="DBG_DEBUG">
-On
+Off
         </oneSwitch>
         <oneSwitch name="DBG_EXTRA_1">
-On
+Off
         </oneSwitch>
     </newSwitchVector>
     <newSwitchVector device="ZWO AM5 USB" name="LOGGING_LEVEL">
