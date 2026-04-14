@@ -3,6 +3,126 @@
 <Profile>Default</Profile>
 <Job>
 <JobType lead='true'/>
+<Name>V1209 Her</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>16.6852</J2000RA>
+<J2000DE>40.7071</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/jobs/variables/150s.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='20'>MinimumAltitude</Constraint>
+<Constraint value='35'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>V488 Gem</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>7.08122</J2000RA>
+<J2000DE>10.4567</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/jobs/variables/150s.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='20'>MinimumAltitude</Constraint>
+<Constraint value='35'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>GSC 3097-0583</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>17.9359</J2000RA>
+<J2000DE>43.0151</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/jobs/variables/300s.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='20'>MinimumAltitude</Constraint>
+<Constraint value='35'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>GSC 3428-1497</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>9.3507</J2000RA>
+<J2000DE>49.0983</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/jobs/variables/150s.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='20'>MinimumAltitude</Constraint>
+<Constraint value='35'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
 <Name>T Coronae Borealis</Name>
 <Group></Group>
 <Coordinates>
@@ -12,6 +132,65 @@
 <OpticalTrain>TS115</OpticalTrain>
 <PositionAngle>-181</PositionAngle>
 <Sequence>/home/spetsnaz/templates/jobs/variables/5s.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='20'>MinimumAltitude</Constraint>
+<Constraint value='35'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>GW UMa</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>10.7365</J2000RA>
+<J2000DE>44.6789</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/jobs/variables/10s.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='-15'>MinimumAltitude</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>GSC 0191-1282</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>7.63292</J2000RA>
+<J2000DE>5.87435</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/jobs/variables/300s.esq</Sequence>
 <StartupCondition>
 <Condition>ASAP</Condition>
 </StartupCondition>
@@ -47,6 +226,66 @@
 </StartupCondition>
 <Constraints>
 <Constraint value='-15'>MinimumAltitude</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>GSC 4163-0984</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>13.0505</J2000RA>
+<J2000DE>60.0211</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/jobs/variables/150s.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='20'>MinimumAltitude</Constraint>
+<Constraint value='35'>MoonSeparation</Constraint>
+<Constraint>EnforceTwilight</Constraint>
+<Constraint>EnforceArtificialHorizon</Constraint>
+</Constraints>
+<CompletionCondition>
+<Condition>Sequence</Condition>
+</CompletionCondition>
+<Steps>
+<Step>Track</Step>
+<Step>Focus</Step>
+<Step>Align</Step>
+<Step>Guide</Step>
+</Steps>
+</Job>
+<Job>
+<JobType lead='true'/>
+<Name>V1116 Her</Name>
+<Group></Group>
+<Coordinates>
+<J2000RA>16.5046</J2000RA>
+<J2000DE>16.9184</J2000DE>
+</Coordinates>
+<OpticalTrain>TS115</OpticalTrain>
+<PositionAngle>-181</PositionAngle>
+<Sequence>/home/spetsnaz/templates/jobs/variables/150s.esq</Sequence>
+<StartupCondition>
+<Condition>ASAP</Condition>
+</StartupCondition>
+<Constraints>
+<Constraint value='20'>MinimumAltitude</Constraint>
+<Constraint value='35'>MoonSeparation</Constraint>
 <Constraint>EnforceTwilight</Constraint>
 <Constraint>EnforceArtificialHorizon</Constraint>
 </Constraints>

@@ -7,7 +7,7 @@
 <RefocusEveryN enabled='false'>60</RefocusEveryN>
 <RefocusOnMeridianFlip enabled='true'/>
 <Job>
-<Exposure>60</Exposure>
+<Exposure>15</Exposure>
 <Format>Raw 16 bit</Format>
 <Encoding>FITS</Encoding>
 <Binning>
@@ -28,8 +28,8 @@
 <ExpEnabled>0</ExpEnabled>
 <TimeStampEnabled>0</TimeStampEnabled>
 </Prefix>
-<Count>550</Count>
-<Delay>0</Delay>
+<Count>5000</Count>
+<Delay>15</Delay>
 <FITSDirectory>/camera</FITSDirectory>
 <PlaceholderFormat>/%t/%T/%F/%t_%T_%F_%e_%D</PlaceholderFormat>
 <PlaceholderSuffix>4</PlaceholderSuffix>
