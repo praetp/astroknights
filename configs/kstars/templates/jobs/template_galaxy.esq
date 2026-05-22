@@ -28,7 +28,7 @@
 <ExpEnabled>0</ExpEnabled>
 <TimeStampEnabled>0</TimeStampEnabled>
 </Prefix>
-<Count>550</Count>
+<Count>750</Count>
 <Delay>0</Delay>
 <FITSDirectory>/camera</FITSDirectory>
 <PlaceholderFormat>/%t/%T/%F/%t_%T_%F_%e_%D</PlaceholderFormat>

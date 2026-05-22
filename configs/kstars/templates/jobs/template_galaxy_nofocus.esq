@@ -2,6 +2,10 @@
 <SequenceQueue version='2.5'>
 <GuideDeviation enabled='true'>3</GuideDeviation>
 <GuideStartDeviation enabled='true'>2</GuideStartDeviation>
+<Autofocus enabled='false'>2</Autofocus>
+<RefocusOnTemperatureDelta enabled='false'>1</RefocusOnTemperatureDelta>
+<RefocusEveryN enabled='false'>60</RefocusEveryN>
+<RefocusOnMeridianFlip enabled='false'/>
 <Job>
 <Exposure>60</Exposure>
 <Format>Raw 16 bit</Format>
